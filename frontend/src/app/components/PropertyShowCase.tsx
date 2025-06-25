@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 const images = [
   "/homes/1.jpg",
   "/homes/2.jpg",
@@ -16,10 +18,12 @@ export default function PropertyShowcase() {
           key={index}
           className="rounded-2xl overflow-hidden shadow-lg max-w-xs"
         >
-          <img
+          <Image
             src={img}
             alt={`home-${index}`}
             className="object-cover w-full h-64"
+            width={400}
+            height={256}
           />
         </div>
       ))}
