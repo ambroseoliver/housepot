@@ -1,6 +1,7 @@
 import Navbar from "@/app/components/Navbar";
 import Hero from "@/app/components/Hero";
 import HowItWorks from "@/app/components/HowItWorks";
+import FeaturedListings from "@/app/components/FeaturedListings";
 
 export default function Home() {
   return (
@@ -9,6 +10,7 @@ export default function Home() {
       <main className="flex-1">
         <Hero />
         <HowItWorks />
+        <FeaturedListings />
       </main>
       <footer className="py-6 text-center text-gray-500 text-sm border-t border-gray-200">
         &copy; {new Date().getFullYear()} HouseSpot. All rights reserved.
