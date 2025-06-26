@@ -3,6 +3,8 @@ import Hero from "@/app/components/Hero";
 import HowItWorks from "@/app/components/HowItWorks";
 import FeaturedListings from "@/app/components/FeaturedListings";
 import NewestListings from "./components/NewestListings";
+import WhyChooseUs from "./components/WhyChooseUs";
+import CallToAction from "./components/CallToAction";
 
 export default function Home() {
   return (
@@ -13,6 +15,8 @@ export default function Home() {
         <HowItWorks />
         <NewestListings />
         <FeaturedListings />
+        <WhyChooseUs />
+        <CallToAction />
       </main>
       <footer className="py-6 text-center text-gray-500 text-sm border-t border-gray-200">
         &copy; {new Date().getFullYear()} HouseSpot. All rights reserved.
