@@ -4,6 +4,7 @@ import HowItWorks from "@/app/components/HowItWorks";
 import FeaturedListings from "@/app/components/FeaturedListings";
 import NewestListings from "./components/NewestListings";
 import WhyChooseUs from "./components/WhyChooseUs";
+import ExploreByLocation from "./components/ExploreByLocation";
 import CallToAction from "./components/CallToAction";
 import FAQ from "./components/FAQ";
 import AppTeaser from "./components/AppTeaser";
@@ -20,6 +21,7 @@ export default function Home() {
         <NewestListings />
         <FeaturedListings />
         <WhyChooseUs />
+        <ExploreByLocation />
         <CallToAction />
         <FAQ />
         <AppTeaser />
