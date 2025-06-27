@@ -4,7 +4,7 @@ import "./globals.css";
 
 // Import your layout components
 import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+
 
 // Google Fonts
 const geistSans = Geist({
@@ -38,7 +38,6 @@ export default function RootLayout({
       >
         <Navbar />
         <main>{children}</main>
-        <Footer />
       </body>
     </html>
   );
