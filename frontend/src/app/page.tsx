@@ -13,6 +13,8 @@ import Testimonials from "./components/Testimonials";
 import Partners from "./components/Partners";
 import Footer from "./components/Footer";
 
+import React from "react";
+
 export default function Home() {
   return (
     <div className="min-h-screen flex flex-col bg-white text-black">
