@@ -40,7 +40,7 @@ export default function NewestListings() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: idx * 0.15, duration: 0.6 }}
-              className="group relative rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800"
+              className="rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800"
             >
               {/* Image */}
               <div className="overflow-hidden">
@@ -49,26 +49,21 @@ export default function NewestListings() {
                   alt={home.title}
                   width={400}
                   height={250}
-                  className="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="w-full h-56 object-cover hover:scale-105 transition-transform duration-500"
                 />
               </div>
 
-              {/* Info */}
-              <div className="p-5">
-                <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
-                  {home.title}
-                </h3>
-                <p className="mt-1 text-gray-600 dark:text-gray-400">
-                  {home.price}
-                </p>
-              </div>
-
-              {/* Hover Gradient Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              {/* View CTA */}
-              <div className="absolute bottom-4 right-4 opacity-0 group-hover:opacity-100 transition-all duration-300">
-                <button className="flex items-center gap-1 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-full shadow-lg">
+              {/* Info + Always-Visible CTA */}
+              <div className="p-5 flex flex-col gap-3">
+                <div>
+                  <h3 className="text-xl font-semibold text-gray-800 dark:text-white">
+                    {home.title}
+                  </h3>
+                  <p className="text-gray-600 dark:text-gray-400">
+                    {home.price}
+                  </p>
+                </div>
+                <button className="w-fit mt-2 flex items-center gap-1 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 px-4 py-2 rounded-full shadow-md transition">
                   View
                   <ArrowRight className="w-4 h-4" />
                 </button>
