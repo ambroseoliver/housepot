@@ -32,9 +32,6 @@ export default function Home() {
         <Partners />
         <Footer />
       </main>
-      <footer className="py-6 text-center text-gray-500 text-sm border-t border-gray-200">
-        &copy; {new Date().getFullYear()} HouseSpot. All rights reserved.
-      </footer>
     </div>
   );
 }
