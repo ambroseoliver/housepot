@@ -8,6 +8,7 @@ import CallToAction from "./components/CallToAction";
 import FAQ from "./components/FAQ";
 import AppTeaser from "./components/AppTeaser";
 import NewsletterSignup from "./components/NewsletterSignup";
+import Testimonials from "./components/Testimonials";
 
 export default function Home() {
   return (
@@ -23,6 +24,7 @@ export default function Home() {
         <FAQ />
         <AppTeaser />
         <NewsletterSignup />
+        <Testimonials />
       </main>
       <footer className="py-6 text-center text-gray-500 text-sm border-t border-gray-200">
         &copy; {new Date().getFullYear()} HouseSpot. All rights reserved.
