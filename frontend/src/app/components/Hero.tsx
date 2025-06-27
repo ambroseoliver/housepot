@@ -56,6 +56,24 @@ export default function Hero() {
             <SearchBar />
           </div>
         </motion.div>
+        <motion.div
+          className="mt-10 w-full max-w-md mx-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1 }}
+        >
+          <div className="relative rounded-xl border border-indigo-100 dark:border-indigo-900 bg-indigo-50/60 dark:bg-indigo-900/30 p-4 text-center shadow-sm backdrop-blur-sm hover:shadow-md transition">
+            <p className="text-sm sm:text-base text-gray-800 dark:text-gray-200">
+              <span className="font-medium">Are you a landlord?</span>{" "}
+              <a
+                href="/list-property"
+                className="text-indigo-600 dark:text-indigo-400 font-semibold underline underline-offset-2 hover:text-indigo-700 dark:hover:text-indigo-300 transition"
+              >
+                List your property with us →
+              </a>
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
