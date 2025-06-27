@@ -2,9 +2,13 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
+
 // Import your layout components
 import { ThemeProvider } from "next-themes";
 import Navbar from "./components/Navbar";
+import BackToTop from "./components/BackToTop";
+import WhatsAppButton from "./components/WhatsAppButton";
+import ChatWidgetPlaceholder from "./components/ChatWidgetPlaceholder";
 
 // Google Fonts
 const geistSans = Geist({
@@ -39,6 +43,9 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <main>{children}</main>
+          <BackToTop />
+          <WhatsAppButton />
+          <ChatWidgetPlaceholder />
         </ThemeProvider>
       </body>
     </html>
