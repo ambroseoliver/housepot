@@ -35,7 +35,7 @@ export default function Navbar() {
           <div className="bg-black w-7 h-7 rounded-full grid place-content-center text-white text-sm">
             H
           </div>
-          HouseSpot
+          HousesSpot
         </Link>
 
         {/* Desktop Menu */}
