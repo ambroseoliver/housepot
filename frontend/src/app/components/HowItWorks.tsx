@@ -26,16 +26,21 @@ const steps = [
 
 export default function HowItWorks() {
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-white via-slate-50 to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950">
-      <div className="max-w-7xl mx-auto text-center">
+    <section className="relative py-24 px-6 bg-gradient-to-br from-gray-950 via-purple-950 to-black dark:from-gray-950 dark:via-purple-950 dark:to-black overflow-hidden">
+      {/* Futuristic Grid/Pattern Background */}
+      <div className="absolute inset-0 z-0 opacity-20">
+        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-repeat [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
+      </div>
+
+      <div className="max-w-7xl mx-auto text-center relative z-10">
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-extrabold mb-12 tracking-tight text-gray-900 dark:text-white"
+          viewport={{ once: true, amount: 0.5 }}
+          transition={{ duration: 0.7, ease: "easeOut" }}
+          className="text-4xl md:text-6xl font-extrabold mb-16 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 drop-shadow-lg"
         >
-          How It Works
+          Your Future Home Journey Starts Here
         </motion.h2>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -44,21 +49,32 @@ export default function HowItWorks() {
             return (
               <motion.div
                 key={index}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.2 }}
-                className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 text-center"
+                initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{
+                  duration: 0.6,
+                  delay: index * 0.15,
+                  ease: "easeOut",
+                }}
+                className="bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl p-8 shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-[1.02] text-center relative overflow-hidden group"
               >
-                <div className="w-14 h-14 mx-auto mb-4 flex items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-900/40 text-indigo-600 dark:text-indigo-300 shadow-inner">
-                  <Icon className="w-6 h-6" />
+                {/* Animated Border/Glow on Hover */}
+                <div className="absolute inset-0 rounded-3xl p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out pointer-events-none">
+                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500 blur-md"></div>
                 </div>
-                <h3 className="text-xl font-semibold mb-2 text-gray-800 dark:text-white">
-                  {step.title}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm leading-relaxed">
-                  {step.description}
-                </p>
+
+                <div className="relative z-10">
+                  <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-xl transform group-hover:scale-110 transition-transform duration-500 ease-in-out">
+                    <Icon className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-2xl font-bold mb-3 text-white">
+                    {step.title}
+                  </h3>
+                  <p className="text-gray-300 text-base leading-relaxed">
+                    {step.description}
+                  </p>
+                </div>
               </motion.div>
             );
           })}
