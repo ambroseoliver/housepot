@@ -2,30 +2,58 @@
 
 import { motion } from "framer-motion";
 import SearchBar from "./SearchBar";
+import Image from "next/image";
+import { FiArrowRightCircle } from "react-icons/fi";
+
+const images = [
+  "/homes/1.jpg",
+  "/homes/2.jpg",
+  "/homes/3.jpg",
+  "/homes/4.jpg",
+  "/homes/5.jpg",
+];
 
 export default function Hero() {
   return (
-    <section className="relative pt-28 pb-16 bg-gradient-to-br from-white via-slate-100 to-white dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 overflow-hidden">
-      {/* Animated BG Glow */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 0.1, y: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut" }}
-          className="w-[600px] h-[600px] bg-indigo-500/30 blur-[120px] rounded-full absolute -top-40 -left-40 dark:bg-cyan-500/20"
-        />
-        <motion.div
-          initial={{ opacity: 0, y: -50 }}
-          animate={{ opacity: 0.1, y: 0 }}
-          transition={{ duration: 1.5, ease: "easeOut", delay: 0.5 }}
-          className="w-[400px] h-[400px] bg-pink-400/30 blur-[100px] rounded-full absolute bottom-0 right-0 dark:bg-pink-500/20"
-        />
-      </div>
+    <section className="relative pt-28 pb-32 px-4 sm:px-8 md:px-12 bg-gradient-to-br from-white via-slate-100 to-white dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 overflow-hidden">
+      {/* 🔹 Animated Background Image Stack */}
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        className="absolute inset-0 z-0 flex justify-center items-end gap-2 sm:gap-4 md:gap-6 overflow-hidden pointer-events-none"
+      >
+        {images.map((src, index) => {
+          const isCenter = index === 2;
+          return (
+            <div
+              key={index}
+              className={`relative rounded-3xl overflow-hidden border border-white/30 dark:border-white/10 shadow-2xl backdrop-blur-md transition-transform duration-500 ${
+                isCenter ? "scale-100 z-30" : "scale-[0.85] z-10"
+              }`}
+              style={{
+                width: isCenter ? "220px" : "170px",
+                height: isCenter ? "330px" : "260px",
+                transform: `translateY(${Math.abs(index - 2) * 12}px)`,
+              }}
+            >
+              <Image
+                src={src}
+                alt={`Home ${index + 1}`}
+                fill
+                className="object-cover brightness-95 saturate-110 blur-[0.5px]"
+                sizes="(max-width: 768px) 80vw, 20vw"
+              />
+            </div>
+          );
+        })}
+      </motion.div>
 
-      {/* Hero Content */}
-      <div className="relative z-10 flex flex-col items-center text-center px-6">
+      {/* 🔹 Foreground Content */}
+      <div className="relative z-10 flex flex-col items-center text-center max-w-3xl mx-auto">
+        {/* Heading */}
         <motion.h1
-          className="text-4xl sm:text-5xl font-extrabold text-gray-900 dark:text-white leading-tight"
+          className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight"
           initial={{ y: 40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1 }}
@@ -36,8 +64,9 @@ export default function Hero() {
           </span>
         </motion.h1>
 
+        {/* Subheading */}
         <motion.p
-          className="mt-4 text-lg text-gray-600 dark:text-gray-300 max-w-xl"
+          className="mt-4 text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-xl"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 1, delay: 0.3 }}
@@ -46,30 +75,32 @@ export default function Hero() {
           Waiyaki Way Nairobi.
         </motion.p>
 
+        {/* Search Bar */}
         <motion.div
-          className="mt-8 w-full flex justify-center px-4"
+          className="mt-10 w-full max-w-6xl px-2 sm:px-4"
           initial={{ opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
         >
-          <div className="w-full max-w-4xl">
-            <SearchBar />
-          </div>
+          <SearchBar />
         </motion.div>
+
+        {/* CTA Banner */}
         <motion.div
-          className="mt-10 w-full max-w-md mx-auto"
+          className="mt-12 w-full max-w-md"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 1 }}
         >
-          <div className="relative rounded-xl border border-indigo-100 dark:border-indigo-900 bg-indigo-50/60 dark:bg-indigo-900/30 p-4 text-center shadow-sm backdrop-blur-sm hover:shadow-md transition">
+          <div className="relative rounded-xl border border-indigo-100 dark:border-indigo-800 bg-indigo-50/60 dark:bg-indigo-900/30 p-5 shadow-sm backdrop-blur-sm transition hover:shadow-md hover:scale-[1.01]">
             <p className="text-sm sm:text-base text-gray-800 dark:text-gray-200">
-              <span className="font-medium">Are you a landlord?</span>{" "}
+              <span className="font-semibold">Are you a landlord?</span>{" "}
               <a
                 href="/list-property"
-                className="text-indigo-600 dark:text-indigo-400 font-semibold underline underline-offset-2 hover:text-indigo-700 dark:hover:text-indigo-300 transition"
+                className="inline-flex items-center gap-1 text-indigo-600 dark:text-indigo-400 font-semibold underline underline-offset-4 hover:text-indigo-700 dark:hover:text-indigo-300 transition"
               >
-                List your property with us →
+                List your property now{" "}
+                <FiArrowRightCircle className="inline-block" />
               </a>
             </p>
           </div>
