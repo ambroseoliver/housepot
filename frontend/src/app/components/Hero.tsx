@@ -43,7 +43,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.3 }}
         >
           Experience the next generation of effortless rental discovery across
-          Kenya.
+          Waiyaki Way Nairobi.
         </motion.p>
 
         <motion.div

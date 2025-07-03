@@ -1,6 +1,6 @@
 <div align="center">
   <img src="public/logo.svg" width="100" alt="Housepot Logo" />
-  <h1>🏠 Housepot</h1>
+  <h1>🏠 Housespot</h1>
   <p><i>Your Future Home, Unlocked — Seamless House Hunting Platform Built with Django + Next.js</i></p>
   <a href="https://housepot.vercel.app" target="_blank"><img src="https://img.shields.io/badge/Live Demo-blue?style=for-the-badge" /></a>
   <br/>
@@ -65,7 +65,7 @@ housespot/
 |:-------------------:|:----------------:|:---------:|
 | ![Hero](public/screens/hero.png) | ![Featured](public/screens/featured.png) | ![Dashboard](public/screens/dashboard.png) |
 
-> 💡 Add real screenshots inside `public/screens/` and update the image links above.
+
 
 ---
 
