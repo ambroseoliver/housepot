@@ -2,107 +2,72 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, Bed, Bath, CarFront, MapPin } from "lucide-react"; // Added more icons for amenities and location
+import { ArrowRight, Bed, Bath, CarFront, MapPin, Star } from "lucide-react"; // Added Star icon
 
 const featured = [
   {
     img: "/homes/1.jpg",
-    title: "Luxury City View Penthouse",
-    location: "USA, New York City",
-    price: "KSh 250,000/mo",
-    description:
-      "Experience unparalleled urban living with breathtaking cityscapes from this exquisite penthouse.",
-    beds: 4,
+    title: "Executive 3BR Apartment - Kileleshwa",
+    location: "Kileleshwa, Nairobi",
+    price: "KSh 120,000/mo",
+    beds: 3,
     baths: 3,
-    sqft: 2800,
+    sqft: 2000,
+    status: "Available",
+    costToMoveIn: "KSh 240,000", // Assuming 1 month deposit + 1 month rent
+    paymentTerms: "Deposit + 1 Month",
+    availability: "Immediate",
+    highlight: "Premium Urban Living",
   },
   {
     img: "/homes/2.jpg",
-    title: "Modern Lakeside Apartment",
-    location: "Canada, Vancouver",
-    price: "KSh 120,000/mo",
-    description:
-      "A sleek and contemporary apartment offering serene lake views and smart home integration.",
-    beds: 2,
-    baths: 2,
-    sqft: 1400,
+    title: "Luxury Villa - Karen",
+    location: "Karen, Nairobi",
+    price: "KSh 300,000/mo",
+    beds: 5,
+    baths: 4,
+    sqft: 4500,
+    status: "Available",
+    costToMoveIn: "KSh 600,000", // Assuming 1 month deposit + 1 month rent
+    paymentTerms: "Deposit + 1 Month",
+    availability: "From 1st September",
+    highlight: "Spacious & Private",
   },
   {
     img: "/homes/3.jpg",
-    title: "Cozy Suburban Family Home",
-    location: "Kenya, Nairobi", // Changed location to Kenya
-    price: "KSh 75,000/mo",
-    description:
-      "Perfect for families, this charming home in a quiet suburb boasts a large garden and modern interiors.",
-    beds: 3,
+    title: "Furnished 2BR Apartment - Kilimani",
+    location: "Kilimani, Nairobi",
+    price: "KSh 95,000/mo",
+    beds: 2,
     baths: 2,
-    sqft: 1800,
+    sqft: 1300,
+    status: "Available",
+    costToMoveIn: "KSh 190,000", // Assuming 1 month deposit + 1 month rent
+    paymentTerms: "Deposit + 1 Month",
+    availability: "Immediate",
+    highlight: "Fully Furnished Comfort",
   },
   {
     img: "/homes/4.jpg",
-    title: "Eco-Friendly Smart Villa",
-    location: "Australia, Sydney",
-    price: "KSh 300,000/mo",
-    description:
-      "Embrace sustainable luxury in this cutting-edge smart villa, designed for comfort and efficiency.",
-    beds: 5,
-    baths: 4,
-    sqft: 3500,
-  },
-  {
-    img: "/homes/5.jpg",
-    title: "Chic Downtown Studio",
-    location: "UK, London",
-    price: "KSh 95,000/mo",
-    description:
-      "A compact yet stylish studio apartment, ideal for urban professionals seeking convenience and design.",
-    beds: 1,
-    baths: 1,
-    sqft: 600,
-  },
-  {
-    img: "/homes/6.jpg",
-    title: "Riverside Loft with Balcony",
-    location: "Germany, Berlin",
-    price: "KSh 180,000/mo",
-    description:
-      "Enjoy vibrant city life from this spacious loft, featuring a private balcony overlooking the river.",
-    beds: 2,
-    baths: 2,
-    sqft: 1600,
-  },
-  {
-    img: "/homes/7.jpg",
-    title: "Seaside Retreat with Pool",
-    location: "Spain, Costa del Sol",
-    price: "KSh 400,000/mo",
-    description:
-      "An exclusive villa offering stunning sea views, a private infinity pool, and direct beach access.",
+    title: "Penthouse with Skyline View",
+    location: "Westlands, Nairobi",
+    price: "KSh 250,000/mo",
     beds: 4,
-    baths: 4,
-    sqft: 3200,
-  },
-  {
-    img: "/homes/8.jpg",
-    title: "Mountain View Cabin",
-    location: "Switzerland, Alps",
-    price: "KSh 200,000/mo",
-    description:
-      "A cozy, modern cabin nestled in the mountains, perfect for a serene escape with panoramic views.",
-    beds: 3,
-    baths: 2,
-    sqft: 1900,
+    baths: 3,
+    sqft: 2800,
+    status: "Available",
+    costToMoveIn: "KSh 500,000", // Assuming 1 month deposit + 1 month rent
+    paymentTerms: "Deposit + 1 Month",
+    availability: "Immediate",
+    highlight: "Panoramic City Views",
   },
 ];
 
 export default function FeaturedListings() {
   return (
     <section className="relative py-24 px-6 bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 overflow-hidden">
-      {/* Optional: Subtle background pattern or texture for depth */}
-      <div className="absolute inset-0 bg-[url('/path/to/subtle-pattern.png')] opacity-5 dark:opacity-10 z-0"></div>{" "}
-      {/* Replace with your subtle pattern */}
       <div className="max-w-7xl mx-auto relative z-10">
-        {/* Heading Section */}
+        {/* Heading */}
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: -20 }}
@@ -113,16 +78,16 @@ export default function FeaturedListings() {
           <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400 uppercase tracking-wider mb-2 block">
             Exclusive Selection
           </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">
+          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight">
             Our Handpicked Featured Listings
           </h2>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Discover exceptional properties chosen for their unique charm,
-            premium features, and desirable locations.
+            Discover top-tier homes picked for elegance, privacy, and modern
+            comfort in prime Nairobi neighborhoods.
           </p>
         </motion.div>
 
-        {/* Listings Grid */}
+        {/* 4-Card Grid */}
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {featured.map((item, idx) => (
             <motion.div
@@ -133,10 +98,20 @@ export default function FeaturedListings() {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: idx * 0.15 }}
             >
-              {/* Featured Badge */}
-              <div className="absolute top-4 left-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-md">
+              {/* Status Tag (like in Newest Listings) */}
+              <span
+                className={`absolute top-4 left-4 px-3 py-1 rounded-full text-xs font-semibold z-10 shadow-md ${
+                  item.status === "Available"
+                    ? "bg-green-500 text-white dark:bg-green-700" // Stronger green for available
+                    : "bg-yellow-500 text-white dark:bg-yellow-700" // Stronger yellow for other status
+                }`}
+              >
+                {item.status}
+              </span>
+              {/* Featured Badge (kept from original featured section) */}
+              <span className="absolute top-4 right-4 bg-indigo-600 text-white text-xs font-bold px-3 py-1 rounded-full z-10 shadow-md animate-pulse">
                 FEATURED
-              </div>
+              </span>
 
               {/* Image */}
               <div className="relative w-full h-60 overflow-hidden">
@@ -149,48 +124,72 @@ export default function FeaturedListings() {
                 />
               </div>
 
-              {/* Info Block */}
+              {/* Info */}
               <div className="p-6 flex flex-col gap-4">
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white leading-tight mb-1">
                     {item.title}
                   </h3>
-                  <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1 mb-2">
+                  <p className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1 mb-3">
                     <MapPin className="w-4 h-4 text-indigo-500" />
                     {item.location}
                   </p>
-                  <p className="text-gray-700 dark:text-gray-300 text-base mb-3 line-clamp-2">
-                    {" "}
-                    {/* Limit description to 2 lines */}
-                    {item.description}
+                  <p className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
+                    {item.price}
                   </p>
                 </div>
 
-                {/* Price & Amenities */}
-                <div className="flex items-end justify-between border-t border-gray-100 dark:border-gray-700 pt-4">
-                  <div className="text-3xl font-extrabold text-indigo-600 dark:text-indigo-400">
-                    {item.price}
+                {/* Amenities (copied from Newest Listings) */}
+                <div className="flex items-center justify-between text-gray-600 dark:text-gray-400 text-sm border-t border-b border-gray-100 dark:border-gray-700 py-3">
+                  <div className="flex items-center gap-1">
+                    <Bed className="w-4 h-4" />
+                    <span>
+                      {item.beds} Bed{item.beds > 1 ? "s" : ""}
+                    </span>
                   </div>
-                  <div className="flex items-center gap-4 text-gray-600 dark:text-gray-400 text-sm">
-                    <div className="flex items-center gap-1">
-                      <Bed className="w-4 h-4" />
-                      <span>{item.beds}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <Bath className="w-4 h-4" />
-                      <span>{item.baths}</span>
-                    </div>
-                    <div className="flex items-center gap-1">
-                      <CarFront className="w-4 h-4" />{" "}
-                      {/* Using CarFront for garage/parking/general area */}
-                      <span>{item.sqft} sqft</span>
-                    </div>
+                  <div className="flex items-center gap-1">
+                    <Bath className="w-4 h-4" />
+                    <span>
+                      {item.baths} Bath{item.baths > 1 ? "s" : ""}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-1">
+                    <CarFront className="w-4 h-4" />
+                    <span>{item.sqft} sqft</span>
                   </div>
                 </div>
 
-                {/* View Details Button */}
-                <button className="w-full mt-4 flex items-center justify-center gap-2 text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-xl shadow-md transition-all duration-300 group-hover:bg-indigo-700">
-                  View Details
+                {/* Kenyanized Info Section (copied from Newest Listings) */}
+                <div className="grid grid-cols-3 gap-2 text-xs font-medium">
+                  <div className="flex flex-col items-center p-2 rounded-md bg-gray-50 dark:bg-gray-700/50">
+                    <span className="text-gray-500 dark:text-gray-400 text-center mb-1">
+                      Key Feature
+                    </span>
+                    <span className="font-semibold text-indigo-600 dark:text-indigo-400 text-sm text-center flex items-center gap-1">
+                      <Star className="w-3 h-3" /> {item.highlight}
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center p-2 rounded-md bg-gray-50 dark:bg-gray-700/50">
+                    <span className="text-gray-500 dark:text-gray-400 text-center mb-1">
+                      Cost to Move In
+                    </span>
+                    <span className="font-semibold text-indigo-600 dark:text-indigo-400 text-sm text-center">
+                      {item.costToMoveIn}
+                    </span>
+                  </div>
+                  <div className="flex flex-col items-center p-2 rounded-md bg-gray-50 dark:bg-gray-700/50">
+                    <span className="text-gray-500 dark:text-gray-400 text-center mb-1">
+                      Availability
+                    </span>
+                    <span className="font-semibold text-indigo-600 dark:text-indigo-400 text-sm text-center">
+                      {item.availability}
+                    </span>
+                  </div>
+                </div>
+
+                {/* CTA (copied from Newest Listings) */}
+                <button className="w-full mt-4 flex items-center justify-center gap-2 text-base font-medium text-white bg-indigo-600 hover:bg-indigo-700 px-6 py-3 rounded-xl shadow-md transition-all duration-300 group">
+                  View House
                   <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1" />
                 </button>
               </div>
