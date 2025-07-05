@@ -4,12 +4,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const partners = [
-  { name: "Nation Media", logo: "/partners/nation.png" },
-  { name: "K24", logo: "/partners/k24.png" },
-  { name: "Citizen TV", logo: "/partners/citizen.png" },
-  { name: "Business Daily", logo: "/partners/bd.png" },
-  { name: "Standard Media", logo: "/partners/standard.png" }, // Added more partners for a fuller section
-  { name: "The Star", logo: "/partners/the-star.png" },
+  { name: "Nation Media", logo: "/partners/nation.jpg" },
+  { name: "K24", logo: "/partners/k24.jpg" },
+  { name: "Citizen TV", logo: "/partners/citizen.jpg" },
+  { name: "Business Daily", logo: "/partners/bd.jpg" },
+  { name: "Standard Media", logo: "/partners/standard.jpg" }, // Added more partners for a fuller section
+  { name: "The Star", logo: "/partners/the-star.jpg" },
 ];
 
 export default function Partners() {

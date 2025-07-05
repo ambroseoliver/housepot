@@ -90,7 +90,7 @@ const newestHomes = [
     highlight: "Budget-Friendly Comfort", // New attractive highlight
   },
   {
-    img: "/homes/8.jpg",
+    img: "/homes/10.jpg",
     title: "1 Bedroom - Ruaka",
     location: "Ruaka, Nairobi",
     price: "KSh 25,000/mo",
