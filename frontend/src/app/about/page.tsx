@@ -9,7 +9,7 @@ export default function AboutPage() {
         {/* Hero Section */}
         <div className="text-center">
           <h1 className="text-4xl md:text-5xl font-extrabold">
-            About <span className="text-indigo-600">HouseSpot</span>
+            About Us <span className="text-indigo-600">HouseSpot</span>
           </h1>
           <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
             We&#39;re revolutionizing the way Kenyans find homes — simple, secure,
