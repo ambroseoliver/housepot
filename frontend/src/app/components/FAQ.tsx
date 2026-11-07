@@ -17,7 +17,7 @@ const faqs = [
   {
     question: "I'm a landlord. How do I list my house?",
     answer:
-      "Sign up as a landlord and book a media session with our team. We handle the rest — from photos to listing management.",
+      "Create a landlord account, then submit your property details and a cover photo through the List a Property page. Housepot will follow up about review and publication.",
   },
   {
     question: "Is there customer support available?",

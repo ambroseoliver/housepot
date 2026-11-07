@@ -1,3 +1,5 @@
+import { getApiBaseUrl } from "./api";
+
 export type Listing = {
   id: string;
   title: string;
@@ -9,10 +11,6 @@ export type Listing = {
   bathrooms: number | null;
   propertyType: string;
 };
-
-const apiBaseUrl = (
-  process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000"
-).replace(/\/+$/, "");
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === "object" && value !== null && !Array.isArray(value);
@@ -80,7 +78,7 @@ function normalizeListing(value: unknown, index: number): Listing | null {
     image: image
       ? image.startsWith("http://") || image.startsWith("https://")
         ? image
-        : `${apiBaseUrl}${image.startsWith("/") ? "" : "/"}${image}`
+        : `${getApiBaseUrl()}${image.startsWith("/") ? "" : "/"}${image}`
       : null,
     bedrooms: asNumber(value.bedrooms ?? value.beds),
     bathrooms: asNumber(value.bathrooms ?? value.baths),
@@ -90,7 +88,7 @@ function normalizeListing(value: unknown, index: number): Listing | null {
 }
 
 export async function fetchListings(): Promise<Listing[]> {
-  const response = await fetch(`${apiBaseUrl}/api/listings/`, {
+  const response = await fetch(`${getApiBaseUrl()}/api/listings/`, {
     headers: { Accept: "application/json" },
     cache: "no-store",
   });

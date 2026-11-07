@@ -36,16 +36,16 @@ export default function CallToAction() {
             </span>
           </Link>
           <Link
-            href="/support?topic=landlord"
+            href="/account?role=landlord"
             className="group rounded-2xl border border-white/15 bg-white/10 p-6 transition hover:bg-white/15"
           >
             <Home size={22} className="mb-8 text-[#c5dfbf]" />
             <h3 className="text-lg font-semibold">I have a property</h3>
             <p className="mt-2 text-sm leading-6 text-white/70">
-              Get in touch to learn how to list your home.
+              Create a landlord account and share your home with renters.
             </p>
             <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#c5dfbf]">
-              Talk to our team
+              Continue as a landlord
               <ArrowRight
                 size={16}
                 className="transition-transform group-hover:translate-x-1"

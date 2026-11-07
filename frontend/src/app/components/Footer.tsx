@@ -4,6 +4,7 @@ import { ArrowUpRight, Mail, MapPin } from "lucide-react";
 const links = [
   { label: "Discover", href: "/discover" },
   { label: "Rental homes", href: "/listings" },
+  { label: "Sign in / Sign up", href: "/account" },
   { label: "About Housepot", href: "/about" },
   { label: "Support", href: "/support" },
 ];

@@ -70,6 +70,12 @@ export default function Navbar() {
           })}
           <ThemeToggle />
           <Link
+            href="/account"
+            className="text-sm font-semibold text-[#285c45] transition-colors hover:text-[#1d4635] dark:text-[#b6d8bd] dark:hover:text-white"
+          >
+            Sign in / Sign up
+          </Link>
+          <Link
             href="/listings"
             className="rounded-full bg-[#285c45] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1d4635] dark:bg-[#9ac5a5] dark:text-[#17231b] dark:hover:bg-[#b6d8bd]"
           >
@@ -107,6 +113,12 @@ export default function Navbar() {
                 {item.label}
               </Link>
             ))}
+            <Link
+              href="/account"
+              className="rounded-lg px-3 py-3 text-sm font-semibold text-[#285c45] hover:bg-[#f3f6f2] dark:text-[#b6d8bd] dark:hover:bg-white/5"
+            >
+              Sign in / Sign up
+            </Link>
             <Link
               href="/listings"
               className="mt-2 rounded-full bg-[#285c45] px-5 py-3 text-center text-sm font-semibold text-white dark:bg-[#9ac5a5] dark:text-[#17231b]"
