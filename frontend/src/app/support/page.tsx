@@ -1,95 +1,109 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { ArrowUpRight, CircleHelp, Mail, MessageCircle } from "lucide-react";
 
-import { Mail, Phone, MessageCircle, HelpCircle } from "lucide-react";
+export const metadata: Metadata = {
+  title: "Support",
+  description:
+    "Get help with your Housepot home search or ask about listing a property.",
+};
+
+const email = "ishivaoliver@gmail.com";
 
 export default function SupportPage() {
   return (
-    <section className="min-h-screen py-24 px-6 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-      <div className="max-w-5xl mx-auto">
-        {/* Hero Section */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold">Need Help?</h1>
-          <p className="mt-4 text-gray-600 dark:text-gray-400 text-lg">
-            Our support team is here for you. Reach out anytime.
-          </p>
-        </div>
+    <div className="bg-[#f8f8f5] pb-20 pt-32 dark:bg-[#111a15] sm:pt-36">
+      <section className="px-5 sm:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+              We’re here to help
+            </p>
+            <h1 className="text-4xl font-semibold tracking-tight text-[#202a24] dark:text-white sm:text-6xl">
+              What can we help you with?
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-[#66736b] dark:text-[#aab5ad]">
+              Whether you’re looking for a rental or want to list a property,
+              reach out and tell us what you need.
+            </p>
+          </div>
 
-        {/* Support Options */}
-        <div className="grid gap-8 md:grid-cols-2 mb-20">
-          <SupportCard
-            icon={<HelpCircle className="w-6 h-6 text-indigo-600" />}
-            title="Browse FAQs"
-            description="Find answers to the most common questions from users and landlords."
-          />
-          <SupportCard
-            icon={<MessageCircle className="w-6 h-6 text-green-600" />}
-            title="Live Chat"
-            description="Talk with our support team directly for quick help during business hours."
-          />
-          <SupportCard
-            icon={<Mail className="w-6 h-6 text-blue-600" />}
-            title="Email Us"
-            description="Send us an email and we’ll get back to you within 24 hours."
-          />
-          <SupportCard
-            icon={<Phone className="w-6 h-6 text-red-500" />}
-            title="Call Us"
-            description="+254 712 345 678 — Mon–Fri: 9AM–5PM EAT"
-          />
-        </div>
+          <div className="mt-12 grid gap-5 md:grid-cols-3">
+            <SupportCard
+              icon={<Mail size={21} />}
+              title="Email our team"
+              description="Send us your question and we’ll get back to you."
+              href={`mailto:${email}`}
+              linkLabel="Send an email"
+            />
+            <SupportCard
+              icon={<MessageCircle size={21} />}
+              title="Property owners"
+              description="Ask us about listing your home with Housepot."
+              href={`mailto:${email}?subject=Property%20listing%20enquiry`}
+              linkLabel="Ask about listing"
+            />
+            <SupportCard
+              icon={<CircleHelp size={21} />}
+              title="Common questions"
+              description="Find quick answers about searching and renting."
+              href="/#faqs"
+              linkLabel="Browse FAQs"
+            />
+          </div>
 
-        {/* Contact Form */}
-        <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 p-8 rounded-xl shadow">
-          <h2 className="text-2xl font-bold mb-6">Send Us a Message</h2>
-          <form className="space-y-4">
-            <input
-              type="text"
-              placeholder="Your Name"
-              className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
-            />
-            <input
-              type="email"
-              placeholder="Your Email"
-              className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
-            />
-            <textarea
-              placeholder="Your Message"
-              rows={5}
-              className="w-full px-4 py-3 rounded-lg bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 placeholder-gray-500 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
-              required
-            />
-            <button
-              type="submit"
-              className="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full text-sm font-medium transition"
+          <div className="mt-12 flex flex-col gap-5 rounded-2xl bg-[#eaf1e9] p-7 dark:bg-[#1c2b21] sm:flex-row sm:items-center sm:justify-between sm:p-9">
+            <div>
+              <h2 className="text-xl font-semibold text-[#202a24] dark:text-white">
+                Ready to find your next place?
+              </h2>
+              <p className="mt-2 text-sm text-[#66736b] dark:text-[#aab5ad]">
+                Browse rental homes and start with the neighbourhood you love.
+              </p>
+            </div>
+            <Link
+              href="/listings"
+              className="inline-flex shrink-0 items-center justify-center gap-2 rounded-full bg-[#285c45] px-5 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4635] dark:bg-[#9ac5a5] dark:text-[#17231b]"
             >
-              Send Message
-            </button>
-          </form>
+              Explore homes <ArrowUpRight size={16} />
+            </Link>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   );
 }
 
-// Reusable support card
 function SupportCard({
   icon,
   title,
   description,
+  href,
+  linkLabel,
 }: {
   icon: React.ReactNode;
   title: string;
   description: string;
+  href: string;
+  linkLabel: string;
 }) {
   return (
-    <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow hover:shadow-lg transition-all">
-      <div className="flex items-center gap-3 mb-3">
+    <article className="rounded-2xl border border-[#e4e9e4] bg-white p-7 dark:border-[#2b3a30] dark:bg-[#18231c]">
+      <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#edf4ed] text-[#285c45] dark:bg-[#26382b] dark:text-[#b6d8bd]">
         {icon}
-        <h3 className="text-lg font-semibold">{title}</h3>
-      </div>
-      <p className="text-gray-600 dark:text-gray-400 text-sm">{description}</p>
-    </div>
+      </span>
+      <h2 className="mt-6 text-lg font-semibold text-[#202a24] dark:text-white">
+        {title}
+      </h2>
+      <p className="mt-2 min-h-12 text-sm leading-6 text-[#66736b] dark:text-[#aab5ad]">
+        {description}
+      </p>
+      <a
+        href={href}
+        className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#285c45] hover:underline dark:text-[#b6d8bd]"
+      >
+        {linkLabel} <ArrowUpRight size={15} />
+      </a>
+    </article>
   );
 }

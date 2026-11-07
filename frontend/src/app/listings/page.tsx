@@ -1,91 +1,51 @@
-"use client";
+import type { Metadata } from "next";
+import ListingGrid from "../components/ListingGrid";
+import SearchBar from "../components/SearchBar";
 
-import Image from "next/image";
-import { MapPin } from "lucide-react";
+type ListingsPageProps = {
+  searchParams: Promise<{
+    location?: string;
+    type?: string;
+    max_price?: string;
+  }>;
+};
 
-const listings = [
-  {
-    title: "Skyline Penthouse",
-    img: "/homes/1.jpg",
-    location: "Nairobi CBD",
-    price: "KSh 250,000/mo",
-  },
-  {
-    title: "Coastal Breeze Villa",
-    img: "/homes/2.jpg",
-    location: "Diani Beach",
-    price: "KSh 400,000/mo",
-  },
-  {
-    title: "Urban Modern Loft",
-    img: "/homes/3.jpg",
-    location: "Westlands",
-    price: "KSh 120,000/mo",
-  },
-  {
-    title: "Gardenview Apartment",
-    img: "/homes/4.jpg",
-    location: "Runda",
-    price: "KSh 95,000/mo",
-  },
-  {
-    title: "Elegant Studio",
-    img: "/homes/5.jpg",
-    location: "Kilimani",
-    price: "KSh 75,000/mo",
-  },
-  {
-    title: "Luxury Beachfront House",
-    img: "/homes/6.jpg",
-    location: "Malindi",
-    price: "KSh 500,000/mo",
-  },
-];
+export const metadata: Metadata = {
+  title: "Rental homes",
+  description: "Search rental homes across Kenya by neighbourhood, home type, and budget.",
+};
 
-export default function ListingsPage() {
+export default async function ListingsPage({ searchParams }: ListingsPageProps) {
+  const filters = await searchParams;
+  const location = filters.location?.trim() ?? "";
+
   return (
-    <section className="min-h-screen py-24 px-6 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold">
-            Explore Available Listings
+    <section className="min-h-screen bg-[#f8f8f5] px-5 pb-20 pt-32 dark:bg-[#111a15] sm:px-8 sm:pt-36">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-10 max-w-3xl">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+            Homes for rent
+          </p>
+          <h1 className="text-4xl font-semibold tracking-tight text-[#202a24] dark:text-white sm:text-5xl">
+            {location ? `Homes in ${location}` : "Find your next home"}
           </h1>
-          <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto text-lg">
-            Find your next home from our latest rental listings across Kenya.
+          <p className="mt-4 max-w-2xl leading-7 text-[#66736b] dark:text-[#aab5ad]">
+            Explore available rentals across Kenya. Narrow your options by
+            neighbourhood, home type, and monthly budget.
           </p>
         </div>
-
-        {/* Listings Grid */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
-          {listings.map((listing, idx) => (
-            <div
-              key={idx}
-              className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl overflow-hidden shadow hover:shadow-xl transition-all"
-            >
-              <Image
-                src={listing.img}
-                alt={listing.title}
-                width={600}
-                height={300}
-                className="w-full h-56 object-cover"
-              />
-              <div className="p-5">
-                <h2 className="text-xl font-semibold">{listing.title}</h2>
-                <p className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-400 mt-1">
-                  <MapPin className="w-4 h-4" />
-                  {listing.location}
-                </p>
-                <p className="mt-2 text-indigo-600 dark:text-indigo-400 font-medium">
-                  {listing.price}
-                </p>
-                <button className="mt-4 px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full text-sm font-medium transition">
-                  View Details
-                </button>
-              </div>
-            </div>
-          ))}
+        <div className="mb-10 max-w-5xl">
+          <SearchBar
+            initialLocation={location}
+            initialType={filters.type}
+            initialMaxPrice={filters.max_price}
+          />
         </div>
+        <ListingGrid
+          location={location}
+          type={filters.type}
+          maxPrice={filters.max_price}
+        />
       </div>
     </section>
   );

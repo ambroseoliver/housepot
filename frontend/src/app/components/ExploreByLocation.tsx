@@ -1,91 +1,77 @@
 "use client";
 
-import { motion } from "framer-motion";
+import Image from "next/image";
 import Link from "next/link";
-import { MapPin, ArrowRight } from "lucide-react"; // Added MapPin and ArrowRight for visual cues
+import { motion } from "framer-motion";
+import { ArrowUpRight, MapPin } from "lucide-react";
 
 const locations = [
-  { name: "Westlands", url: "/listings?location=westlands" },
-  { name: "Loresho", url: "/listings?location=loresho" },
-  { name: "Mountain View", url: "/listings?location=mountain-view" },
-  { name: "Kileleshwa", url: "/listings?location=kileleshwa" },
-  { name: "Lavington", url: "/listings?location=lavington" },
-  { name: "Gigiri", url: "/listings?location=gigiri" }, // Example: further areas in Nairobi
-  { name: "Kilimani", url: "/listings?location=kilimani" }, // Example: further areas in Nairobi
-  { name: "Muthaiga", url: "/listings?location=muthaiga" }, // Example: further areas in Nairobi
+  { name: "Westlands", note: "City living, connected", image: "/homes/2.jpg" },
+  { name: "Kilimani", note: "A little bit of everything", image: "/homes/6.jpg" },
+  { name: "Kileleshwa", note: "A quieter side of town", image: "/homes/4.jpg" },
+  { name: "Karen", note: "Room to slow down", image: "/homes/3.jpg" },
 ];
 
 export default function ExploreByLocation() {
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-gray-50 via-blue-50 to-gray-50 dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 overflow-hidden">
-      {/* Background blobs for consistent futuristic feel */}
-      <div className="absolute top-0 left-0 w-72 h-72 bg-blue-400 opacity-5 rounded-full mix-blend-multiply filter blur-3xl animate-blob -z-0"></div>
-      <div className="absolute bottom-0 right-0 w-72 h-72 bg-purple-400 opacity-5 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000 -z-0"></div>
+    <section className="bg-white px-5 py-20 dark:bg-[#18231c] sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-10 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div className="max-w-2xl">
+            <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+              Neighbourhood guide
+            </p>
+            <h2 className="text-3xl font-semibold tracking-tight text-[#202a24] dark:text-white sm:text-4xl">
+              Start with a place you love
+            </h2>
+            <p className="mt-3 leading-7 text-[#66736b] dark:text-[#aab5ad]">
+              Explore popular Nairobi neighbourhoods and see what feels like
+              your kind of place.
+            </p>
+          </div>
+          <Link
+            href="/listings?location=Nairobi"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#285c45] hover:text-[#1d4635] dark:text-[#b6d8bd]"
+          >
+            Browse all Nairobi homes <ArrowUpRight size={17} />
+          </Link>
+        </div>
 
-      <div className="max-w-7xl mx-auto relative z-10 text-center">
-        {/* Heading Section */}
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="mb-16"
-        >
-          <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2 block">
-            Discover Your Neighborhood
-          </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">
-            Explore Popular Areas in Nairobi
-          </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Find homes in the most sought-after neighborhoods, tailored to your
-            preferences, all within Nairobi.
-          </p>
-        </motion.div>
-
-        {/* Location Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-          {locations.map((location, i) => (
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {locations.map((location, index) => (
             <motion.div
-              key={i}
-              initial={{ opacity: 0, scale: 0.9, y: 30 }}
-              whileInView={{ opacity: 1, scale: 1, y: 0 }}
-              transition={{ delay: i * 0.1, duration: 0.6 }}
-              viewport={{ once: true }}
-              className="relative group overflow-hidden rounded-2xl shadow-lg hover:shadow-xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 transition-all duration-300 transform hover:-translate-y-2 cursor-pointer"
+              key={location.name}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.45, delay: index * 0.08 }}
             >
-              <Link href={location.url} className="block p-6 text-center">
-                <div className="w-16 h-16 bg-blue-100 dark:bg-blue-900/40 text-blue-600 dark:text-blue-300 rounded-full flex items-center justify-center mx-auto mb-4 shadow-inner transition-transform duration-300 group-hover:scale-110 group-hover:bg-blue-200 dark:group-hover:bg-blue-800">
-                  <MapPin className="w-8 h-8" />
+              <Link
+                href={`/listings?location=${encodeURIComponent(location.name)}`}
+                className="group relative block aspect-[0.92] overflow-hidden rounded-2xl bg-[#253329]"
+              >
+                <Image
+                  src={location.image}
+                  alt=""
+                  fill
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  className="object-cover transition duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/10 to-transparent" />
+                <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                  <p className="mb-2 flex items-center gap-1.5 text-xs font-medium text-white/80">
+                    <MapPin size={14} /> Nairobi, Kenya
+                  </p>
+                  <h3 className="text-xl font-semibold">{location.name}</h3>
+                  <p className="mt-1 text-sm text-white/75">{location.note}</p>
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
-                  {location.name}
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400 text-sm flex items-center justify-center gap-1">
-                  View Listings{" "}
-                  <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
-                </p>
+                <span className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[#285c45] transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                  <ArrowUpRight size={17} />
+                </span>
               </Link>
             </motion.div>
           ))}
         </div>
-
-        {/* Global CTA */}
-        <motion.div
-          className="mt-20 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.6 }}
-          viewport={{ once: true }}
-        >
-          <Link
-            href="/listings?city=nairobi"
-            className="inline-flex items-center gap-2 text-white bg-gray-900 hover:bg-gray-700 transition-all duration-300 px-8 py-4 rounded-full text-lg font-semibold shadow-xl dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300"
-          >
-            See All Nairobi Listings
-            <ArrowRight className="w-5 h-5" />
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

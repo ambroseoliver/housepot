@@ -2,105 +2,95 @@
 
 import { motion } from "framer-motion";
 import {
-  ShieldCheck,
-  Sparkles,
-  Users2,
-  Timer,
-  Award,
-  MessageCircleHeart,
-} from "lucide-react"; // Added more icons
+  BadgeCheck,
+  Compass,
+  HeartHandshake,
+  Image,
+  SearchCheck,
+  Wallet,
+} from "lucide-react";
 
 const reasons = [
   {
-    icon: <ShieldCheck className="w-8 h-8 text-white" />,
-    title: "Verified Listings & Security",
-    desc: "Every home is personally vetted and verified by our team, ensuring authenticity and peace of mind. Your safety is our priority.",
-    iconBgClass: "bg-indigo-600",
+    icon: SearchCheck,
+    title: "Search that makes sense",
+    description:
+      "Narrow your search by area, type of home, and the budget you have in mind.",
   },
   {
-    icon: <Sparkles className="w-8 h-8 text-white" />,
-    title: "Professional Media Showcase",
-    desc: "We provide high-quality photos and immersive video tours for every listing, helping you visualize your future home with stunning clarity.",
-    iconBgClass: "bg-blue-600",
+    icon: BadgeCheck,
+    title: "Clear listing details",
+    description:
+      "See the essentials up front so you can compare homes with more confidence.",
   },
   {
-    icon: <MessageCircleHeart className="w-8 h-8 text-white" />, // Changed from Users2 for a more empathetic feel
-    title: "Dedicated Human Support",
-    desc: "Our friendly experts are available 24/7 to guide you through every step of your home-finding journey. No bots, just real help.",
-    iconBgClass: "bg-purple-600",
+    icon: Wallet,
+    title: "Built around your budget",
+    description:
+      "Explore rental options across a range of budgets, all in one place.",
   },
   {
-    icon: <Timer className="w-8 h-8 text-white" />,
-    title: "Lightning-Fast Process",
-    desc: "From discovery to move-in, our streamlined platform helps you secure your dream home swiftly, often within 72 hours.",
-    iconBgClass: "bg-cyan-600",
+    icon: Compass,
+    title: "Neighbourhood-first",
+    description:
+      "Get to know popular areas and find a community that suits your day-to-day.",
   },
   {
-    icon: <Award className="w-8 h-8 text-white" />, // New reason
-    title: "Transparent & Fair Deals",
-    desc: "We ensure full transparency in all transactions, with no hidden fees and fair pricing, building trust in every deal.",
-    iconBgClass: "bg-red-600",
+    icon: Image,
+    title: "A closer look",
+    description:
+      "Browse listing photos and details before deciding which homes to explore further.",
   },
   {
-    icon: <Users2 className="w-8 h-8 text-white" />, // New reason, reusing Users2 for community
-    title: "Community & Local Insights",
-    desc: "Gain access to valuable local insights and community information, helping you choose not just a house, but a perfect neighborhood.",
-    iconBgClass: "bg-green-600",
+    icon: HeartHandshake,
+    title: "Real support",
+    description:
+      "Have a question? Our support page makes it simple to reach the Housepot team.",
   },
 ];
 
 export default function WhyChooseUs() {
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-b from-white via-blue-50 to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 overflow-hidden">
-      {/* Background elements for futuristic feel, similar to other sections */}
-      <div className="absolute top-1/4 left-0 w-72 h-72 bg-blue-500 opacity-5 rounded-full mix-blend-multiply filter blur-3xl animate-blob -z-0"></div>
-      <div className="absolute bottom-1/4 right-0 w-72 h-72 bg-indigo-500 opacity-5 rounded-full mix-blend-multiply filter blur-3xl animate-blob animation-delay-2000 -z-0"></div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Heading Section */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="text-sm font-semibold text-blue-600 dark:text-blue-400 uppercase tracking-wider mb-2 block">
-            Your Trusted Partner
-          </span>
-          <h2 className="text-4xl md:text-5xl font-extrabold text-gray-900 dark:text-white tracking-tight leading-tight">
-            Why Choose Housepot?
-          </h2>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            Discover what makes us the preferred and most reliable platform for
-            finding your next home in Kenya.
+    <section className="bg-white px-5 py-20 dark:bg-[#18231c] sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="mb-12 max-w-2xl">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+            The Housepot difference
           </p>
-        </motion.div>
-
-        {/* Reasons Grid */}
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3">
-          {reasons.map((reason, idx) => (
-            <motion.div
-              key={idx}
-              className="bg-white dark:bg-gray-800 rounded-3xl p-8 shadow-xl hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 group flex flex-col items-center text-center border border-gray-100 dark:border-gray-700"
-              initial={{ opacity: 0, y: 50, scale: 0.95 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: idx * 0.15 }}
-            >
-              <div
-                className={`w-16 h-16 rounded-full flex items-center justify-center mb-6 shadow-lg transition-all duration-300 group-hover:scale-110 ${reason.iconBgClass}`}
+          <h2 className="text-3xl font-semibold tracking-tight text-[#202a24] dark:text-white sm:text-4xl">
+            Home hunting, with more clarity
+          </h2>
+          <p className="mt-4 leading-7 text-[#66736b] dark:text-[#aab5ad]">
+            Less noise, useful details, and a simple way to move from browsing
+            to your next step.
+          </p>
+        </div>
+        <div className="grid gap-x-8 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+          {reasons.map((reason, index) => {
+            const Icon = reason.icon;
+            return (
+              <motion.article
+                key={reason.title}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.25 }}
+                transition={{ duration: 0.4, delay: index * 0.05 }}
+                className="flex gap-4"
               >
-                {reason.icon}
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-3">
-                {reason.title}
-              </h3>
-              <p className="text-gray-600 dark:text-gray-400 text-base leading-relaxed">
-                {reason.desc}
-              </p>
-            </motion.div>
-          ))}
+                <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#edf4ed] text-[#285c45] dark:bg-[#26382b] dark:text-[#b6d8bd]">
+                  <Icon size={20} />
+                </span>
+                <div>
+                  <h3 className="font-semibold text-[#202a24] dark:text-white">
+                    {reason.title}
+                  </h3>
+                  <p className="mt-2 text-sm leading-6 text-[#66736b] dark:text-[#aab5ad]">
+                    {reason.description}
+                  </p>
+                </div>
+              </motion.article>
+            );
+          })}
         </div>
       </div>
     </section>

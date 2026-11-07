@@ -1,110 +1,77 @@
-"use client";
+import { MapPin, Search } from "lucide-react";
 
-import { Search, Mic, MapPin } from "lucide-react";
-import { useState } from "react";
+const fieldClassName =
+  "h-12 w-full rounded-xl border border-[#e4e9e4] bg-white px-4 text-sm text-[#202a24] outline-none transition placeholder:text-[#89938c] focus:border-[#78a987] focus:ring-4 focus:ring-[#78a987]/15 dark:border-[#2b3a30] dark:bg-[#18231c] dark:text-white dark:placeholder:text-gray-400";
 
-export default function SearchBar() {
-  const [isListening, setIsListening] = useState(false);
-  const [location, setLocation] = useState("");
-  const [houseType, setHouseType] = useState("");
-  const [budget, setBudget] = useState("");
+type SearchBarProps = {
+  initialLocation?: string;
+  initialType?: string;
+  initialMaxPrice?: string;
+};
 
-  const handleMicClick = () => {
-    setIsListening(true);
-    alert("🎙 Voice input coming soon!");
-    setTimeout(() => setIsListening(false), 1500);
-  };
-
-  const handleSearch = () => {
-    console.log({ location, houseType, budget });
-    // Future: Redirect or filter listings
-  };
-
+export default function SearchBar({
+  initialLocation = "",
+  initialType = "",
+  initialMaxPrice = "",
+}: SearchBarProps) {
   return (
-    <div className="w-full max-w-6xl bg-white/70 dark:bg-gray-900/70 backdrop-blur-md border border-gray-200 dark:border-gray-700 rounded-2xl shadow-md px-4 sm:px-6 py-6 flex flex-col lg:flex-row gap-4 items-center justify-between transition-all">
-      {/* Location Input */}
-      <div className="relative w-full lg:flex-1">
-        <label htmlFor="location" className="sr-only">
-          Location
-        </label>
-        <span className="absolute left-4 top-3.5 text-gray-500 dark:text-gray-400">
-          <MapPin className="w-5 h-5" />
-        </span>
-        <input
-          id="location"
-          type="text"
-          placeholder="Location..."
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="pl-12 pr-4 py-3 w-full rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
+    <form
+      action="/listings"
+      method="get"
+      role="search"
+      className="grid gap-3 rounded-2xl border border-white/60 bg-white p-3 shadow-[0_24px_70px_rgba(15,35,22,0.2)] sm:grid-cols-[1.4fr_1fr_1fr_auto] sm:items-center sm:rounded-[20px] sm:p-4"
+    >
+      <label className="relative block">
+        <span className="sr-only">Neighbourhood or city</span>
+        <MapPin
+          aria-hidden="true"
+          size={18}
+          className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-[#66736b]"
         />
-      </div>
+        <input
+          className={`${fieldClassName} pl-11`}
+          type="search"
+          name="location"
+          placeholder="Where do you want to live?"
+          autoComplete="address-level2"
+          defaultValue={initialLocation}
+        />
+      </label>
 
-      {/* House Type */}
-      <div className="w-full lg:flex-1">
-        <label htmlFor="houseType" className="sr-only">
-          House Type
-        </label>
-        <select
-          id="houseType"
-          value={houseType}
-          onChange={(e) => setHouseType(e.target.value)}
-          className="w-full px-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
-        >
-          <option value="">House Type</option>
-          <option value="single-room">Single Room</option>
-          <option value="bedsitter">Bedsitter / Studio</option>
-          <option value="1-bedroom">1 Bedroom</option>
-          <option value="2-bedroom">2 Bedroom</option>
-          <option value="3-bedroom">3 Bedroom</option>
+      <label>
+        <span className="sr-only">Home type</span>
+        <select className={fieldClassName} name="type" defaultValue={initialType}>
+          <option value="">Any home type</option>
+          <option value="bedsitter">Bedsitter</option>
+          <option value="studio">Studio</option>
+          <option value="1-bedroom">1 bedroom</option>
+          <option value="2-bedroom">2 bedrooms</option>
+          <option value="3-bedroom">3+ bedrooms</option>
         </select>
-      </div>
+      </label>
 
-      {/* Budget */}
-      <div className="w-full lg:flex-1">
-        <label htmlFor="budget" className="sr-only">
-          Budget
-        </label>
+      <label>
+        <span className="sr-only">Monthly budget</span>
         <select
-          id="budget"
-          value={budget}
-          onChange={(e) => setBudget(e.target.value)}
-          className="w-full px-4 py-3 rounded-full border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm sm:text-base"
+          className={fieldClassName}
+          name="max_price"
+          defaultValue={initialMaxPrice}
         >
-          <option value="">Select Budget</option>
-          <option value="5000">Below KSh 5,000</option>
-          <option value="10000">KSh 5,001 – 10,000</option>
-          <option value="20000">KSh 10,001 – 20,000</option>
-          <option value="20001">KSh 20,001 – 25,000</option>
-          <option value="25001">KSh 25,001 – 30,000</option>
-          <option value="30000">KSh 30,001 – 40,000</option>
-          <option value="40001">KSh 40,001 – 50,000</option>
-          <option value="50001">Above KSh 50,000</option>
+          <option value="">Any monthly budget</option>
+          <option value="15000">Up to KSh 15,000</option>
+          <option value="25000">Up to KSh 25,000</option>
+          <option value="50000">Up to KSh 50,000</option>
+          <option value="100000">Up to KSh 100,000</option>
         </select>
-      </div>
+      </label>
 
-      {/* Search & Mic Buttons */}
-      <div className="flex gap-3 w-full lg:w-auto justify-center">
-        <button
-          onClick={handleSearch}
-          className="flex items-center justify-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-6 py-3 rounded-full transition-all duration-200 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        >
-          <Search className="w-5 h-5" />
-          Search
-        </button>
-
-        <button
-          onClick={handleMicClick}
-          className={`p-3 rounded-full transition-all duration-200 focus:outline-none focus:ring-2 ${
-            isListening
-              ? "bg-red-600 text-white focus:ring-red-400"
-              : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-white hover:scale-110"
-          }`}
-          aria-label="Voice Search"
-        >
-          <Mic className="w-5 h-5" />
-        </button>
-      </div>
-    </div>
+      <button
+        type="submit"
+        className="inline-flex h-12 items-center justify-center gap-2 rounded-xl bg-[#285c45] px-6 text-sm font-semibold text-white transition-colors hover:bg-[#1d4635] focus-visible:outline-white dark:bg-[#9ac5a5] dark:text-[#17231b] dark:hover:bg-[#b6d8bd]"
+      >
+        <Search size={17} />
+        Search homes
+      </button>
+    </form>
   );
 }

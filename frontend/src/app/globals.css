@@ -1,51 +1,80 @@
 @import "tailwindcss";
 
-/* === CSS Variables: Light Mode === */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8f8f5;
+  --foreground: #202a24;
+  --muted: #66736b;
+  --brand: #285c45;
+  --brand-dark: #1d4635;
+  --surface: #ffffff;
+  --line: #e4e9e4;
   --font-sans: var(--font-geist-sans, ui-sans-serif, system-ui, sans-serif);
   --font-mono: var(--font-geist-mono, ui-monospace, SFMono-Regular, monospace);
 }
 
-/* === Dark Mode Theme Variables === */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+.dark {
+  --background: #111a15;
+  --foreground: #f3f5f2;
+  --muted: #aab5ad;
+  --brand: #9ac5a5;
+  --brand-dark: #b6d8bd;
+  --surface: #18231c;
+  --line: #2b3a30;
 }
 
-/* === Base Styling === */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  background-color: var(--background);
+  background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans);
   @apply antialiased;
 }
 
-/* === Utility Reset & Tweaks === */
 img,
 svg {
   display: block;
   max-width: 100%;
-  height: auto;
 }
 
 a {
-  @apply transition-all duration-200 ease-in-out;
   text-decoration: none;
 }
 
-button {
-  @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
-/* === Optional Section Padding Shortcut === */
-.section {
-  @apply px-6 sm:px-12 lg:px-24 py-16;
+button,
+a,
+input,
+select,
+textarea {
+  -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+  background: #c9dfce;
+  color: #1d4635;
+}
+
+:focus-visible {
+  outline: 3px solid #78a987;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

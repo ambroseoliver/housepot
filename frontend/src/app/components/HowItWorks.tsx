@@ -1,83 +1,86 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Search, Home, UploadCloud } from "lucide-react";
+import { ArrowRight, Heart, KeyRound, Search } from "lucide-react";
+import Link from "next/link";
 
 const steps = [
   {
+    number: "01",
     icon: Search,
-    title: "Discover",
+    title: "Tell us what matters",
     description:
-      "Effortlessly browse curated homes based on your lifestyle, preferences, and budget.",
+      "Choose a neighbourhood, home type, and monthly budget that feel right for you.",
   },
   {
-    icon: Home,
-    title: "Book",
+    number: "02",
+    icon: Heart,
+    title: "Explore your options",
     description:
-      "Easily schedule viewings, request media, or connect with our team for insights.",
+      "Compare available homes and save the ones you can picture yourself in.",
   },
   {
-    icon: UploadCloud,
-    title: "List Your Property",
+    number: "03",
+    icon: KeyRound,
+    title: "Take the next step",
     description:
-      "Landlords can request professional photos & videos and go live with high-impact listings.",
+      "Get in touch with the Housepot team to arrange a viewing and move forward.",
   },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="relative py-24 px-6 bg-gradient-to-br from-gray-950 via-purple-950 to-black dark:from-gray-950 dark:via-purple-950 dark:to-black overflow-hidden">
-      {/* Futuristic Grid/Pattern Background */}
-      <div className="absolute inset-0 z-0 opacity-20">
-        <div className="absolute inset-0 bg-[url('/grid-pattern.svg')] bg-repeat [mask-image:linear-gradient(to_bottom,white,transparent)]"></div>
-      </div>
-
-      <div className="max-w-7xl mx-auto text-center relative z-10">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.5 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="text-4xl md:text-6xl font-extrabold mb-16 tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-400 via-pink-400 to-indigo-400 drop-shadow-lg"
-        >
-          Your Future Home Journey Starts Here
-        </motion.h2>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
+    <section className="bg-[#f8f8f5] px-5 py-20 dark:bg-[#111a15] sm:px-8 sm:py-24">
+      <div className="mx-auto max-w-7xl">
+        <div className="mx-auto mb-12 max-w-2xl text-center">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+            A better way to rent
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-[#202a24] dark:text-white sm:text-4xl">
+            From searching to settling in
+          </h2>
+          <p className="mt-4 leading-7 text-[#66736b] dark:text-[#aab5ad]">
+            Finding your next place shouldn’t feel like a full-time job. We
+            make the next step clearer.
+          </p>
+        </div>
+        <div className="grid gap-4 md:grid-cols-3">
           {steps.map((step, index) => {
             const Icon = step.icon;
             return (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.9, y: 40 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{
-                  duration: 0.6,
-                  delay: index * 0.15,
-                  ease: "easeOut",
-                }}
-                className="bg-gray-800/60 backdrop-blur-md border border-gray-700/50 rounded-3xl p-8 shadow-2xl hover:shadow-purple-500/30 transition-all duration-500 ease-in-out transform hover:-translate-y-2 hover:scale-[1.02] text-center relative overflow-hidden group"
+              <motion.article
+                key={step.number}
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: index * 0.08 }}
+                className="rounded-2xl border border-[#e4e9e4] bg-white p-7 dark:border-[#2b3a30] dark:bg-[#18231c] sm:p-8"
               >
-                {/* Animated Border/Glow on Hover */}
-                <div className="absolute inset-0 rounded-3xl p-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out pointer-events-none">
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-purple-500 to-pink-500 blur-md"></div>
+                <div className="mb-8 flex items-center justify-between">
+                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf4ed] text-[#285c45] dark:bg-[#26382b] dark:text-[#b6d8bd]">
+                    <Icon size={22} />
+                  </span>
+                  <span className="text-sm font-semibold tracking-widest text-[#9ba79d] dark:text-[#637267]">
+                    {step.number}
+                  </span>
                 </div>
-
-                <div className="relative z-10">
-                  <div className="w-16 h-16 mx-auto mb-6 flex items-center justify-center rounded-full bg-gradient-to-br from-purple-600 to-indigo-600 text-white shadow-xl transform group-hover:scale-110 transition-transform duration-500 ease-in-out">
-                    <Icon className="w-8 h-8" />
-                  </div>
-                  <h3 className="text-2xl font-bold mb-3 text-white">
-                    {step.title}
-                  </h3>
-                  <p className="text-gray-300 text-base leading-relaxed">
-                    {step.description}
-                  </p>
-                </div>
-              </motion.div>
+                <h3 className="text-xl font-semibold text-[#202a24] dark:text-white">
+                  {step.title}
+                </h3>
+                <p className="mt-3 leading-7 text-[#66736b] dark:text-[#aab5ad]">
+                  {step.description}
+                </p>
+              </motion.article>
             );
           })}
+        </div>
+        <div className="mt-9 text-center">
+          <Link
+            href="/listings"
+            className="inline-flex items-center gap-2 text-sm font-semibold text-[#285c45] transition hover:gap-3 dark:text-[#b6d8bd]"
+          >
+            Start exploring <ArrowRight size={16} />
+          </Link>
         </div>
       </div>
     </section>

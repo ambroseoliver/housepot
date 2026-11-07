@@ -1,141 +1,121 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Menu, X, Search } from "lucide-react";
-import Link from "next/link";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import clsx from "clsx";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { Menu, X } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
-import { AnimatePresence, motion } from "framer-motion";
+
+const navItems = [
+  { label: "Discover", href: "/discover" },
+  { label: "Homes", href: "/listings" },
+  { label: "About", href: "/about" },
+  { label: "Support", href: "/support" },
+];
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+  const pathname = usePathname();
 
-  // Add shadow on scroll
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 10);
-    window.addEventListener("scroll", onScroll);
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+    setIsOpen(false);
+  }, [pathname]);
 
-  // Prevent body scroll when mobile menu is open
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    return () => {
-      document.body.style.overflow = "";
+    if (!isOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setIsOpen(false);
     };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
   }, [isOpen]);
 
-  const navItems = ["Home", "Discover", "Listings", "About", "Support"];
-
   return (
-    <nav
-      className={clsx(
-        "fixed top-0 left-0 w-full z-50 transition-all duration-300",
-        isScrolled
-          ? "bg-white/80 shadow-md backdrop-blur-md dark:bg-black/80"
-          : "bg-transparent"
-      )}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center gap-2 text-xl font-bold text-gray-900 dark:text-white"
-        >
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/40 bg-white/90 text-[#202a24] shadow-sm shadow-black/[0.03] backdrop-blur-xl dark:border-white/10 dark:bg-[#111a15]/90 dark:text-white">
+      <nav
+        aria-label="Main navigation"
+        className="mx-auto flex h-[76px] max-w-7xl items-center justify-between px-5 sm:px-8"
+      >
+        <Link href="/" className="flex items-center gap-2.5" aria-label="Housepot home">
           <Image
             src="/logo/Company Logo.jpg"
-            alt="HousesSpot Logo"
-            width={36}
-            height={36}
-            className="object-contain rounded-md w-9 h-9"
+            alt=""
+            width={40}
+            height={40}
+            className="h-10 w-10 rounded-xl object-cover"
             priority
           />
-          <span className="hidden sm:inline text-xl font-bold text-gray-900 dark:text-white">
-            HousesSpot
-          </span>
+          <span className="text-xl font-bold tracking-tight">housepot</span>
         </Link>
 
-        {/* Desktop Menu */}
-        <ul className="hidden md:flex items-center gap-6 font-medium text-gray-800 dark:text-gray-100">
-          {navItems.map((item) => (
-            <li key={item}>
+        <div className="hidden items-center gap-8 md:flex">
+          {navItems.map((item) => {
+            const active =
+              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            return (
               <Link
-                href={`/${
-                  item.toLowerCase() === "home" ? "" : item.toLowerCase()
+                key={item.href}
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={`text-sm font-medium transition-colors hover:text-[#285c45] dark:hover:text-[#b6d8bd] ${
+                  active
+                    ? "text-[#285c45] dark:text-[#b6d8bd]"
+                    : "text-[#66736b] dark:text-gray-300"
                 }`}
-                className="hover:text-black dark:hover:text-white transition-colors"
               >
-                {item}
+                {item.label}
               </Link>
-            </li>
-          ))}
-          <li>
-            <Link href="/search">
-              <Search className="w-5 h-5" />
-            </Link>
-          </li>
-          <li>
-            <ThemeToggle />
-          </li>
-          <li>
-            <Link href="/signin">
-              <button className="bg-black text-white px-4 py-1.5 rounded-full hover:bg-gray-900 transition text-sm">
-                Sign In
-              </button>
-            </Link>
-          </li>
-        </ul>
+            );
+          })}
+          <ThemeToggle />
+          <Link
+            href="/listings"
+            className="rounded-full bg-[#285c45] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1d4635] dark:bg-[#9ac5a5] dark:text-[#17231b] dark:hover:bg-[#b6d8bd]"
+          >
+            Find a home
+          </Link>
+        </div>
 
-        {/* Mobile Toggle */}
-        <div className="md:hidden flex items-center gap-3">
+        <div className="flex items-center gap-3 md:hidden">
           <ThemeToggle />
           <button
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
-            className="text-gray-800 dark:text-white"
+            type="button"
+            onClick={() => setIsOpen((open) => !open)}
+            aria-label={isOpen ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={isOpen}
+            aria-controls="mobile-navigation"
+            className="rounded-xl p-2 text-[#202a24] hover:bg-black/5 dark:text-white dark:hover:bg-white/10"
           >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isOpen ? <X size={21} /> : <Menu size={21} />}
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -10 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden absolute top-full left-0 w-full z-40 bg-white dark:bg-black px-6 py-6 space-y-4 border-t border-gray-200 dark:border-gray-800"
-          >
+      {isOpen && (
+        <div
+          id="mobile-navigation"
+          className="border-t border-[#e4e9e4] bg-white px-5 py-4 dark:border-[#2b3a30] dark:bg-[#18231c] md:hidden"
+        >
+          <div className="mx-auto flex max-w-7xl flex-col gap-1">
             {navItems.map((item) => (
               <Link
-                key={item}
-                href={`/${
-                  item.toLowerCase() === "home" ? "" : item.toLowerCase()
-                }`}
-                className="block text-gray-800 dark:text-white hover:underline text-base"
-                onClick={() => setIsOpen(false)}
+                key={item.href}
+                href={item.href}
+                className="rounded-lg px-3 py-3 text-sm font-medium text-[#354239] hover:bg-[#f3f6f2] dark:text-gray-100 dark:hover:bg-white/5"
               >
-                {item}
+                {item.label}
               </Link>
             ))}
-            <Link href="/search" onClick={() => setIsOpen(false)}>
-              <div className="flex items-center gap-2 text-gray-800 dark:text-white hover:underline">
-                <Search className="w-5 h-5" /> Search
-              </div>
+            <Link
+              href="/listings"
+              className="mt-2 rounded-full bg-[#285c45] px-5 py-3 text-center text-sm font-semibold text-white dark:bg-[#9ac5a5] dark:text-[#17231b]"
+            >
+              Find a home
             </Link>
-            <Link href="/signin" onClick={() => setIsOpen(false)}>
-              <button className="w-full bg-black text-white px-4 py-2 rounded-full hover:bg-gray-900 transition text-sm">
-                Sign In
-              </button>
-            </Link>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </nav>
+          </div>
+        </div>
+      )}
+    </header>
   );
 }

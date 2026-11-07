@@ -1,70 +1,58 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Search, Home } from "lucide-react";
 import Link from "next/link";
+import { ArrowRight, Home, Search } from "lucide-react";
 
 export default function CallToAction() {
   return (
-    <section className="bg-gradient-to-r from-indigo-50 to-slate-100 py-20 px-6">
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-gray-900">
-          What brings you to Housepot?
-        </h2>
-        <p className="text-gray-600 mt-2 max-w-xl mx-auto">
-          Choose your path and get started in seconds.
-        </p>
-      </div>
-
-      <div className="flex flex-col lg:flex-row justify-center gap-8 max-w-5xl mx-auto">
-        {/* Tenant Card */}
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-md p-8 flex-1 text-center"
-        >
-          <div className="flex justify-center mb-4">
-            <Search className="w-10 h-10 text-indigo-600" />
-          </div>
-          <h3 className="text-2xl font-semibold mb-2 text-gray-900">I&#39;m Looking for a Home</h3>
-          <p className="text-gray-600 mb-4 text-sm">
-            Find and explore top listings tailored to your lifestyle and budget.
+    <section className="bg-[#1d4635] px-5 py-20 text-white dark:bg-[#203a2b] sm:px-8 sm:py-24">
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1fr_1.2fr] lg:items-center">
+        <div>
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#c5dfbf]">
+            Your next chapter
           </p>
-          <Link href="/explore">
-            <button className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition">
-              Start Exploring
-            </button>
-          </Link>
-        </motion.div>
-
-        {/* Landlord Card */}
-        <motion.div
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.98 }}
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          viewport={{ once: true }}
-          className="bg-white rounded-2xl shadow-md p-8 flex-1 text-center"
-        >
-          <div className="flex justify-center mb-4">
-            <Home className="w-10 h-10 text-indigo-600" />
-          </div>
-          <h3
-            className="text-2xl font-semibold mb-2 text-gray-900">I&#39;m a Landlord</h3>
-          <p className="text-gray-600 mb-4 text-sm">
-            List your property and connect with quality tenants in no time. 
+          <h2 className="max-w-xl text-3xl font-semibold tracking-tight sm:text-4xl">
+            Whether you’re looking or letting, we’re here to help.
+          </h2>
+          <p className="mt-4 max-w-lg leading-7 text-white/75">
+            Find a place to call home, or talk to us about sharing your property
+            with people looking for theirs.
           </p>
-          <Link href="/landlord">
-            <button className="bg-indigo-600 text-white px-6 py-2 rounded-full hover:bg-indigo-700 transition"> 
-              List My Property
-            </button>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-2">
+          <Link
+            href="/listings"
+            className="group rounded-2xl border border-white/15 bg-white/10 p-6 transition hover:bg-white/15"
+          >
+            <Search size={22} className="mb-8 text-[#c5dfbf]" />
+            <h3 className="text-lg font-semibold">I’m looking for a home</h3>
+            <p className="mt-2 text-sm leading-6 text-white/70">
+              Explore available rentals and find your fit.
+            </p>
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#c5dfbf]">
+              Browse homes
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </span>
           </Link>
-        </motion.div>
+          <Link
+            href="/support?topic=landlord"
+            className="group rounded-2xl border border-white/15 bg-white/10 p-6 transition hover:bg-white/15"
+          >
+            <Home size={22} className="mb-8 text-[#c5dfbf]" />
+            <h3 className="text-lg font-semibold">I have a property</h3>
+            <p className="mt-2 text-sm leading-6 text-white/70">
+              Get in touch to learn how to list your home.
+            </p>
+            <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#c5dfbf]">
+              Talk to our team
+              <ArrowRight
+                size={16}
+                className="transition-transform group-hover:translate-x-1"
+              />
+            </span>
+          </Link>
+        </div>
       </div>
     </section>
   );

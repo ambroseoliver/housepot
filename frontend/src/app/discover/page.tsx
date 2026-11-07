@@ -1,140 +1,89 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Home, MapPin, Building2 } from "lucide-react";
+import type { Metadata } from "next";
 import Link from "next/link";
-import Image from "next/image";
+import { ArrowUpRight, House, MoveRight } from "lucide-react";
+import ListingGrid from "../components/ListingGrid";
 
-const categories = [
-  {
-    icon: <Home className="w-6 h-6" />,
-    title: "Apartments",
-    description: "Comfortable city living with modern amenities.",
-  },
-  {
-    icon: <Building2 className="w-6 h-6" />,
-    title: "Townhouses",
-    description: "Spacious family homes in secure neighborhoods.",
-  },
-  {
-    icon: <MapPin className="w-6 h-6" />,
-    title: "Short-Term Rentals",
-    description: "Flexible stays for vacations or temporary housing.",
-  },
-];
+export const metadata: Metadata = {
+  title: "Discover homes",
+  description:
+    "Discover rental homes in Kenya by the kind of space you’re looking for.",
+};
 
-const featured = [
-  {
-    img: "/homes/1.jpg",
-    title: "Urban Loft",
-    location: "Nairobi",
-    price: "KSh 120,000/mo",
-  },
-  {
-    img: "/homes/2.jpg",
-    title: "Serene Villa",
-    location: "Karen",
-    price: "KSh 300,000/mo",
-  },
-  {
-    img: "/homes/3.jpg",
-    title: "Modern Studio",
-    location: "Westlands",
-    price: "KSh 85,000/mo",
-  },
+const homeTypes = [
+  { title: "Bedsitters", type: "bedsitter", note: "A space of your own" },
+  { title: "Studios", type: "studio", note: "Simple, open-plan living" },
+  { title: "1 bedroom", type: "1-bedroom", note: "Room to settle in" },
+  { title: "2 bedrooms", type: "2-bedroom", note: "A little more room" },
 ];
 
 export default function DiscoverPage() {
   return (
-    <div className="py-24 px-6 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-      {/* Heading */}
-      <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-16"
-      >
-        <h1 className="text-4xl md:text-5xl font-extrabold">
-          Discover Your Ideal Space
-        </h1>
-        <p className="mt-4 text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Explore by category, location, or lifestyle. Find homes that match
-          your rhythm.
-        </p>
-      </motion.div>
-
-      {/* Categories */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-5xl mx-auto mb-20">
-        {categories.map((item, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.2 }}
-            className="bg-gray-100 dark:bg-gray-900 p-6 rounded-xl text-center shadow hover:shadow-xl transition"
-          >
-            <div className="flex items-center justify-center w-12 h-12 mx-auto mb-4 bg-indigo-100 dark:bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 rounded-full">
-              {item.icon}
-            </div>
-            <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
-              {item.description}
+    <div className="bg-[#f8f8f5] pb-20 pt-32 dark:bg-[#111a15] sm:pt-36">
+      <section className="px-5 sm:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+              Discover your next home
             </p>
-          </motion.div>
-        ))}
-      </div>
+            <h1 className="text-4xl font-semibold tracking-tight text-[#202a24] dark:text-white sm:text-6xl">
+              Find a space that feels like you.
+            </h1>
+            <p className="mt-5 max-w-2xl text-lg leading-8 text-[#66736b] dark:text-[#aab5ad]">
+              Start with the kind of home you have in mind, then explore
+              available rentals to find your fit.
+            </p>
+          </div>
 
-      {/* Featured Homes */}
-      <div className="max-w-6xl mx-auto">
-        <h2 className="text-2xl md:text-3xl font-bold mb-6">
-          Handpicked Just for You
-        </h2>
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {featured.map((home, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.1 }}
-              className="rounded-2xl overflow-hidden shadow-md bg-white dark:bg-gray-900 border dark:border-gray-800 hover:shadow-lg transition"
-            >
-              <Image
-                src={home.img}
-                alt={home.title}
-                width={400}
-                height={250}
-                className="w-full h-56 object-cover"
-              />
-              <div className="p-5">
-                <h3 className="text-lg font-semibold">{home.title}</h3>
-                <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {home.location}
+          <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {homeTypes.map((home) => (
+              <Link
+                key={home.type}
+                href={`/listings?type=${home.type}`}
+                className="group rounded-2xl border border-[#e4e9e4] bg-white p-5 transition hover:-translate-y-0.5 hover:border-[#c0d0c2] hover:shadow-lg dark:border-[#2b3a30] dark:bg-[#18231c] dark:hover:border-[#405947]"
+              >
+                <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#edf4ed] text-[#285c45] dark:bg-[#26382b] dark:text-[#b6d8bd]">
+                  <House size={19} />
+                </span>
+                <h2 className="mt-5 font-semibold text-[#202a24] dark:text-white">
+                  {home.title}
+                </h2>
+                <p className="mt-1 text-sm text-[#66736b] dark:text-[#aab5ad]">
+                  {home.note}
                 </p>
-                <p className="mt-1 text-indigo-600 dark:text-indigo-400 font-medium">
-                  {home.price}
-                </p>
-              </div>
-            </motion.div>
-          ))}
+                <span className="mt-4 flex items-center justify-between text-xs font-semibold text-[#52765b] dark:text-[#b6d8bd]">
+                  Explore homes
+                  <ArrowUpRight
+                    size={15}
+                    className="transition group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                  />
+                </span>
+              </Link>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
 
-      {/* CTA */}
-      <motion.div
-        className="mt-20 text-center"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.5 }}
-      >
-        <Link
-          href="/listings"
-          className="inline-block bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-full text-sm font-semibold shadow-lg transition"
-        >
-          Browse All Listings →
-        </Link>
-      </motion.div>
+      <section className="mt-20 bg-white px-5 py-16 dark:bg-[#18231c] sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-9 flex items-end justify-between gap-4">
+            <div>
+              <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+                Available now
+              </p>
+              <h2 className="text-3xl font-semibold tracking-tight text-[#202a24] dark:text-white">
+                Explore rental homes
+              </h2>
+            </div>
+            <Link
+              href="/listings"
+              className="hidden items-center gap-2 text-sm font-semibold text-[#285c45] hover:underline dark:text-[#b6d8bd] sm:inline-flex"
+            >
+              View all <MoveRight size={16} />
+            </Link>
+          </div>
+          <ListingGrid limit={3} />
+        </div>
+      </section>
     </div>
   );
 }

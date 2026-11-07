@@ -1,83 +1,117 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import {
+  ArrowRight,
+  Compass,
+  HeartHandshake,
+  House,
+  ShieldCheck,
+} from "lucide-react";
 
-import { Users, Building, Sparkles, HeartHandshake } from "lucide-react";
+export const metadata: Metadata = {
+  title: "About Housepot",
+  description:
+    "Learn about Housepot’s mission to make finding and renting a home in Kenya clearer and more welcoming.",
+};
+
+const values = [
+  {
+    icon: HeartHandshake,
+    title: "People first",
+    description:
+      "A home search is personal. We aim to make the experience feel useful, clear, and human.",
+  },
+  {
+    icon: Compass,
+    title: "Local insight",
+    description:
+      "Neighbourhoods matter. We bring the search closer to the places and communities around you.",
+  },
+  {
+    icon: ShieldCheck,
+    title: "Clarity at every step",
+    description:
+      "We put the details you need in view, so you can make more informed decisions as you search.",
+  },
+];
 
 export default function AboutPage() {
   return (
-    <section className="min-h-screen py-24 px-6 bg-white dark:bg-gray-950 text-gray-900 dark:text-white">
-      <div className="max-w-5xl mx-auto space-y-20">
-        {/* Hero Section */}
-        <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-extrabold">
-            About Us <span className="text-indigo-600">HouseSpot</span>
-          </h1>
-          <p className="mt-4 text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
-            We&#39;re revolutionizing the way Kenyans find homes — simple, secure,
-            and stunning.
+    <div className="bg-[#f8f8f5] pb-20 pt-32 dark:bg-[#111a15] sm:pt-36">
+      <section className="px-5 sm:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="max-w-3xl">
+            <p className="mb-4 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+              A little about us
+            </p>
+            <h1 className="text-4xl font-semibold leading-tight tracking-tight text-[#202a24] dark:text-white sm:text-6xl">
+              A better way to find the place you’ll call home.
+            </h1>
+            <p className="mt-6 max-w-2xl text-lg leading-8 text-[#66736b] dark:text-[#aab5ad]">
+              Housepot is a home-hunting platform built around the needs of
+              renters and property owners in Kenya. We bring listings,
+              neighbourhood discovery, and helpful next steps together in one
+              place.
+            </p>
+            <Link
+              href="/listings"
+              className="mt-8 inline-flex items-center gap-2 rounded-full bg-[#285c45] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#1d4635] dark:bg-[#9ac5a5] dark:text-[#17231b]"
+            >
+              Explore homes <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      <section className="mt-20 bg-white px-5 py-16 dark:bg-[#18231c] sm:px-8 sm:py-20">
+        <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[0.8fr_1.2fr] lg:items-start">
+          <div>
+            <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-[#edf4ed] text-[#285c45] dark:bg-[#26382b] dark:text-[#b6d8bd]">
+              <House size={23} />
+            </span>
+            <h2 className="mt-6 text-3xl font-semibold tracking-tight text-[#202a24] dark:text-white">
+              What we’re here to do
+            </h2>
+          </div>
+          <p className="text-lg leading-8 text-[#66736b] dark:text-[#aab5ad]">
+            We believe finding a home should start with possibility, not
+            frustration. Housepot helps renters explore options in the places
+            they care about, and gives property owners a simpler way to connect
+            with people looking for a home. We’re building a more thoughtful
+            rental experience, one useful detail at a time.
           </p>
         </div>
+      </section>
 
-        {/* Mission + Vision */}
-        <div className="grid md:grid-cols-2 gap-12">
-          <div>
-            <h2 className="text-2xl font-bold mb-2">🌍 Our Mission</h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              To connect tenants and landlords seamlessly through a modern
-              platform that values quality, trust, and convenience.
-            </p>
-          </div>
-          <div>
-            <h2 className="text-2xl font-bold mb-2">🔭 Our Vision</h2>
-            <p className="text-gray-600 dark:text-gray-400">
-              To be Kenya&#39;s most trusted and innovative digital real estate
-              platform — empowering every user to find the perfect space.
-            </p>
-          </div>
+      <section className="mx-auto max-w-7xl px-5 py-20 sm:px-8 sm:py-24">
+        <div className="mb-10 max-w-2xl">
+          <p className="mb-3 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
+            What guides us
+          </p>
+          <h2 className="text-3xl font-semibold tracking-tight text-[#202a24] dark:text-white sm:text-4xl">
+            Built around the people who make a place home
+          </h2>
         </div>
-
-        {/* Core Values */}
-        <div className="text-center">
-          <h2 className="text-3xl font-bold mb-8">Our Core Values</h2>
-          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8">
-            <ValueCard icon={<HeartHandshake />} title="Integrity" />
-            <ValueCard icon={<Sparkles />} title="Innovation" />
-            <ValueCard icon={<Building />} title="Quality Listings" />
-            <ValueCard icon={<Users />} title="User-Centered" />
-          </div>
+        <div className="grid gap-5 md:grid-cols-3">
+          {values.map((value) => {
+            const Icon = value.icon;
+            return (
+              <article
+                key={value.title}
+                className="rounded-2xl border border-[#e4e9e4] bg-white p-7 dark:border-[#2b3a30] dark:bg-[#18231c]"
+              >
+                <Icon size={23} className="text-[#52765b] dark:text-[#b6d8bd]" />
+                <h3 className="mt-6 text-lg font-semibold text-[#202a24] dark:text-white">
+                  {value.title}
+                </h3>
+                <p className="mt-3 text-sm leading-6 text-[#66736b] dark:text-[#aab5ad]">
+                  {value.description}
+                </p>
+              </article>
+            );
+          })}
         </div>
-
-        {/* Why We're Different */}
-        <div>
-          <h2 className="text-3xl font-bold mb-4">What Sets Us Apart</h2>
-          <ul className="list-disc list-inside text-gray-600 dark:text-gray-400 space-y-2">
-            <li>📸 Only high-quality listings with verified media</li>
-            <li>⚡️ Super-fast search with intelligent filtering</li>
-            <li>🧑‍💻 Landlord-controlled listing via pro media booking</li>
-            <li>🧠 Smart, minimal design for an exceptional user experience</li>
-            <li>🌐 Built with modern, secure tech (Next.js + Tailwind)</li>
-          </ul>
-        </div>
-
-        {/* CTA */}
-        <div className="text-center mt-16">
-          <a
-            href="/support"
-            className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white rounded-full font-medium transition"
-          >
-            Get in Touch
-          </a>
-        </div>
-      </div>
-    </section>
-  );
-}
-
-// Reusable Value Card Component
-function ValueCard({ icon, title }: { icon: React.ReactNode; title: string }) {
-  return (
-    <div className="bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-xl p-6 shadow hover:shadow-lg transition-all text-center">
-      <div className="flex justify-center mb-3 text-indigo-600">{icon}</div>
-      <h3 className="font-semibold text-lg">{title}</h3>
+      </section>
     </div>
   );
 }
