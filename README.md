@@ -1,127 +1,124 @@
-<div align="center">
-  <img src="public/logo.svg" width="100" alt="Housepot Logo" />
-  <h1>🏠 Housespot</h1>
-  <p><i>Your Future Home, Unlocked — Seamless House Hunting Platform Built with Django + Next.js</i></p>
-  <a href="https://housepot.vercel.app" target="_blank"><img src="https://img.shields.io/badge/Live Demo-blue?style=for-the-badge" /></a>
-  <br/>
-</div>
+# Housepot
 
----
+Housepot is a rental-home discovery platform focused on renters and property owners in Kenya. The repository contains a responsive Next.js frontend and a Django backend scaffold.
 
-## 🚀 Project Overview
+> **Project status:** The frontend experience is implemented, but the backend in this repository is currently a Django admin scaffold. Rental listings, authentication, and property-submission API endpoints are not implemented yet, so API-dependent features require a compatible backend to work end to end.
 
-**Housepot** is a next-generation, full-stack house rental platform designed to transform how people search, discover, and rent homes across Kenya. Whether you're a tenant searching for your dream home or a landlord listing properties, Housepot makes the process smooth, smart, and secure.
+## Screenshots
 
----
+| Home | Discover |
+| --- | --- |
+| ![Housepot home page](docs/screenshots/homepage.png) | ![Housepot discover page](docs/screenshots/discover.png) |
 
-## 🧠 Tech Stack
+## Features
 
-### 🖥 Frontend (Next.js + Tailwind)
-- **Next.js App Router**
-- **TypeScript**
-- **TailwindCSS + Framer Motion**
-- `lucide-react` for icons
-- Fully responsive & optimized UI
+- Browse and search rental homes by neighbourhood, property type, and monthly budget.
+- Discover common home types, including bedsitters, studios, and one- and two-bedroom homes.
+- Responsive layouts, light and dark themes, and animated interface elements.
+- Tenant sign-in and registration flows, plus a landlord property-listing flow (requires the API described below).
+- Supporting pages for About, FAQs, and customer support.
 
-### 🛠 Backend (Django + REST Framework)
-- Django 5.x
-- Django REST Framework
-- JWT Authentication (SimpleJWT)
-- Custom User Roles (Tenant & Landlord)
-- CORS support & secure API integration
+## Technology
 
----
+| Area | Technologies |
+| --- | --- |
+| Frontend | Next.js 15, React 19, TypeScript, Tailwind CSS 4 |
+| UI | Framer Motion, Lucide React, next-themes |
+| Backend scaffold | Django 5.2, Django REST Framework, Simple JWT |
+| Default database | SQLite |
 
-## 📂 Folder Structure
+## Repository layout
 
-```bash
-housespot/
-│
-├── backend/               # Django backend (API, models, auth)
-├── frontend/              # Next.js frontend (pages, components, styles)
-├── docs/                  # Project documentation
-├── .env                   # Environment variables
-└── README.md              # You're here 🚀
+```text
+.
+├── backend/
+│   ├── config/                 # Django settings and URL configuration
+│   ├── manage.py
+│   └── requirements.txt
+├── docs/
+│   └── screenshots/            # README screenshots
+└── frontend/
+    ├── public/                 # Property, partner, and brand assets
+    └── src/
+        ├── app/                # Routes and shared UI components
+        └── lib/                # API and listing helpers
 ```
 
----
+## Run locally
 
-## ✨ Features
+You will need Node.js 20 or later and Python 3.10 or later. Run the backend and frontend in separate terminals.
 
-- 🔐 **User Authentication (JWT)** with custom user roles
-- 🏠 **Landlord Property Listing System**
-- 🔍 **AI-enhanced Search & Smart Filters**
-- 🎥 **High-quality listing visuals** (Booked by Housepot Team)
-- 📱 **Fully Responsive Frontend UI**
-- 🧭 **Explore by Location, Hero Search, App Teasers**
-- 📬 **Newsletter Signups + CTA Integration**
-- ⚡ **Framer Motion Animations**
-
----
-
-## 📸 Screenshots
-
-| Hero & Smart Search | Featured Listings | Dashboard |
-|:-------------------:|:----------------:|:---------:|
-| ![Hero](public/screens/hero.png) | ![Featured](public/screens/featured.png) | ![Dashboard](public/screens/dashboard.png) |
-
-
-
----
-
-## 🔧 Installation & Setup
+### 1. Start the Django backend
 
 ```bash
-# Clone the repo
-git clone https://github.com/your-username/housepot.git && cd housepot
-
-# BACKEND SETUP
 cd backend
-python -m venv env
-source env/Scripts/activate   # Use `source env/bin/activate` on Mac/Linux
+python3 -m venv .venv
+source .venv/bin/activate
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+```
 
-# FRONTEND SETUP
-cd ../frontend
-npm install
+On Windows, activate the virtual environment with `.venv\Scripts\activate`.
+
+The Django server runs at `http://127.0.0.1:8000`. At present, it only exposes Django's admin route at `/admin/`; the rental API endpoints are not included.
+
+### 2. Start the Next.js frontend
+
+```bash
+cd frontend
+npm ci
 npm run dev
 ```
 
----
+Open `http://localhost:3000`.
 
-## 🧪 API Testing
+The frontend uses `http://127.0.0.1:8000` as its default API origin. To point it at another compatible backend, create `frontend/.env.local`:
 
-Use Postman or Thunder Client for:
+```env
+NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+```
 
-- `POST /api/users/register/`
-- `POST /api/users/login/`
-- `GET /api/listings/`
+Restart the frontend after changing environment variables.
 
----
+## Application routes
 
-## 📦 Deployment
+| Route | Description |
+| --- | --- |
+| `/` | Landing page, home search, featured rentals, and location discovery |
+| `/discover` | Browse by home type |
+| `/listings` | Rental search and filters |
+| `/about` | About Housepot |
+| `/support` | Support and common questions |
+| `/account` | Tenant and landlord account flows |
+| `/list-property` | Landlord property submission |
 
-- **Frontend:** Vercel
-- **Backend:** Render, Railway, or Heroku
-- **Database:** PostgreSQL / SQLite3 (Local)
+## Backend integration
 
----
+The frontend expects a Django API with these endpoints:
 
-## 👤 Author
+| Method | Endpoint | Purpose |
+| --- | --- | --- |
+| `GET` | `/api/listings/` | Return listings as an array or an object containing a `results`, `data`, or `listings` array |
+| `POST` | `/api/users/register/` | Register an account; landlord registration sends `role: "landlord"` |
+| `POST` | `/api/users/login/` | Authenticate and return an access JWT |
+| `POST` | `/api/listings/` | Submit a property as multipart form data, authenticated with a JWT |
 
-**Oliver Ambrose**  
+Listings should include a title or name, location, and monthly rent or price. Property submissions include a title, location, property type, monthly rent, bedroom and bathroom counts, description, and image. The backend should enforce landlord permissions, configure CORS for the frontend origin, and validate all submitted data.
 
-💻 [GitHub](https://github.com/ambroseoliver) •  
-✉️ ishivaoliver@gmail.com
+These are frontend integration expectations, not implemented API endpoints in this repository. See the [frontend README](frontend/README.md) for additional payload and response details.
 
----
+## Development
 
-## 📄 License
+From `frontend/`:
 
-Licensed under the MIT License.
+```bash
+npm run lint
+npm run build
+```
 
-<div align="center">
-  <strong>💡 Built with love by Oliver | Designed to revolutionize rentals in Kenya 🇰🇪</strong>
-</div>
+The backend's development settings are not production-ready. Before deployment, configure secrets and hosts securely, disable debug mode, and implement and test the required API endpoints.
+
+## Maintainer
+
+[Oliver Ambrose](https://github.com/ambroseoliver)
