@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowRight, House, Search } from "lucide-react";
 import AuthForm from "../components/AuthForm";
+import AccountVerification from "../components/AccountVerification";
 
 export const metadata: Metadata = {
   title: "Sign in or sign up",
@@ -9,11 +10,14 @@ export const metadata: Metadata = {
 };
 
 type AccountPageProps = {
-  searchParams: Promise<{ role?: string; next?: string }>;
+  searchParams: Promise<{ role?: string; next?: string; verification_token?: string }>;
 };
 
 export default async function AccountPage({ searchParams }: AccountPageProps) {
   const params = await searchParams;
+  if (params.verification_token) {
+    return <AccountVerification token={params.verification_token} />;
+  }
   const role =
     params.role === "landlord" || params.role === "tenant" ? params.role : null;
   const next = params.next === "list-property" ? "list-property" : undefined;

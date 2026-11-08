@@ -1,8 +1,6 @@
 # Housepot
 
-Housepot is a rental-home discovery platform focused on renters and property owners in Kenya. The repository contains a responsive Next.js frontend and a Django backend scaffold.
-
-> **Project status:** The frontend experience is implemented, but the backend in this repository is currently a Django admin scaffold. Rental listings, authentication, and property-submission API endpoints are not implemented yet, so API-dependent features require a compatible backend to work end to end.
+Housepot is a rental-home discovery platform focused on renters and property owners in Kenya. The repository includes a responsive Next.js frontend and a Django REST API for accounts, property discovery, listing moderation, and renter-owner interactions.
 
 ## Screenshots
 
@@ -15,7 +13,8 @@ Housepot is a rental-home discovery platform focused on renters and property own
 - Browse and search rental homes by neighbourhood, property type, and monthly budget.
 - Discover common home types, including bedsitters, studios, and one- and two-bedroom homes.
 - Responsive layouts, light and dark themes, and animated interface elements.
-- Tenant sign-in and registration flows, plus a landlord property-listing flow (requires the API described below).
+- Tenant sign-in and registration flows, plus a landlord property-listing flow.
+- Role-aware API with JWT authentication, ownership checks, property moderation, saved listings, and inquiries.
 - Supporting pages for About, FAQs, and customer support.
 
 ## Technology
@@ -24,7 +23,7 @@ Housepot is a rental-home discovery platform focused on renters and property own
 | --- | --- |
 | Frontend | Next.js 15, React 19, TypeScript, Tailwind CSS 4 |
 | UI | Framer Motion, Lucide React, next-themes |
-| Backend scaffold | Django 5.2, Django REST Framework, Simple JWT |
+| Backend | Django 5.2, Django REST Framework, Simple JWT |
 | Default database | SQLite |
 
 ## Repository layout
@@ -46,7 +45,7 @@ Housepot is a rental-home discovery platform focused on renters and property own
 
 ## Run locally
 
-You will need Node.js 20 or later and Python 3.10 or later. Run the backend and frontend in separate terminals.
+You will need Node.js 20 or later and Python 3.12 or later. Run the backend and frontend in separate terminals.
 
 ### 1. Start the Django backend
 
@@ -61,7 +60,7 @@ python manage.py runserver
 
 On Windows, activate the virtual environment with `.venv\Scripts\activate`.
 
-The Django server runs at `http://127.0.0.1:8000`. At present, it only exposes Django's admin route at `/admin/`; the rental API endpoints are not included.
+The Django server runs at `http://127.0.0.1:8000`. API docs are available at `/api/docs/` and the admin at `/admin/`.
 
 ### 2. Start the Next.js frontend
 
@@ -93,20 +92,9 @@ Restart the frontend after changing environment variables.
 | `/account` | Tenant and landlord account flows |
 | `/list-property` | Landlord property submission |
 
-## Backend integration
+## Backend
 
-The frontend expects a Django API with these endpoints:
-
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| `GET` | `/api/listings/` | Return listings as an array or an object containing a `results`, `data`, or `listings` array |
-| `POST` | `/api/users/register/` | Register an account; landlord registration sends `role: "landlord"` |
-| `POST` | `/api/users/login/` | Authenticate and return an access JWT |
-| `POST` | `/api/listings/` | Submit a property as multipart form data, authenticated with a JWT |
-
-Listings should include a title or name, location, and monthly rent or price. Property submissions include a title, location, property type, monthly rent, bedroom and bathroom counts, description, and image. The backend should enforce landlord permissions, configure CORS for the frontend origin, and validate all submitted data.
-
-These are frontend integration expectations, not implemented API endpoints in this repository. See the [frontend README](frontend/README.md) for additional payload and response details.
+The backend exposes versioned `/api/v1/` endpoints and retains unversioned paths used by the frontend. See the [backend guide](backend/README.md) for setup, API details, environment configuration, migrations, tests, and production deployment. Frontend-specific API expectations are documented in the [frontend README](frontend/README.md).
 
 ## Development
 
@@ -117,7 +105,7 @@ npm run lint
 npm run build
 ```
 
-The backend's development settings are not production-ready. Before deployment, configure secrets and hosts securely, disable debug mode, and implement and test the required API endpoints.
+Before production deployment, configure secrets and hosts securely, use PostgreSQL, configure SMTP and exact CORS origins, and run Django's deployment checks. See the backend guide for the full production checklist.
 
 ## Maintainer
 

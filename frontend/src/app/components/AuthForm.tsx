@@ -170,10 +170,21 @@ export default function AuthForm({ role, next }: AuthFormProps) {
                 value={password}
                 onChange={(event) => setPassword(event.target.value)}
                 required
-                minLength={8}
+                minLength={10}
                 maxLength={128}
               />
             </label>
+
+            {!isRegistering && (
+              <div className="text-right">
+                <Link
+                  href="/account/reset-password"
+                  className="text-sm font-medium text-[#52765b] hover:text-[#285c45] dark:text-[#b6d8bd] dark:hover:text-white"
+                >
+                  Forgot password?
+                </Link>
+              </div>
+            )}
 
             {error && (
               <p
