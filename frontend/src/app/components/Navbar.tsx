@@ -4,15 +4,22 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X } from "lucide-react";
+import { Menu, X, UserRound } from "lucide-react";
 import ThemeToggle from "./ThemeToggle";
 
 const navItems = [
+  { label: "Home", href: "/" },
+  { label: "Find a home", href: "/listings" },
   { label: "Discover", href: "/discover" },
-  { label: "Homes", href: "/listings" },
   { label: "About", href: "/about" },
-  { label: "Support", href: "/support" },
+  { label: "Contact", href: "/support" },
 ];
+
+function isActiveNavItem(pathname: string, href: string) {
+  return href === "/"
+    ? pathname === "/"
+    : pathname === href || pathname.startsWith(`${href}/`);
+}
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,19 +53,18 @@ export default function Navbar() {
             className="h-10 w-10 rounded-xl object-cover"
             priority
           />
-          <span className="text-xl font-bold tracking-tight">housepot</span>
+          <span className="text-xl font-bold tracking-tight">Housespot</span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-5 xl:flex">
           {navItems.map((item) => {
-            const active =
-              pathname === item.href || pathname.startsWith(`${item.href}/`);
+            const active = isActiveNavItem(pathname, item.href);
             return (
               <Link
                 key={item.href}
                 href={item.href}
                 aria-current={active ? "page" : undefined}
-                className={`text-sm font-medium transition-colors hover:text-[#285c45] dark:hover:text-[#b6d8bd] ${
+                className={`whitespace-nowrap text-sm font-medium transition-colors hover:text-[#285c45] dark:hover:text-[#b6d8bd] ${
                   active
                     ? "text-[#285c45] dark:text-[#b6d8bd]"
                     : "text-[#66736b] dark:text-gray-300"
@@ -71,19 +77,20 @@ export default function Navbar() {
           <ThemeToggle />
           <Link
             href="/account"
-            className="text-sm font-semibold text-[#285c45] transition-colors hover:text-[#1d4635] dark:text-[#b6d8bd] dark:hover:text-white"
+            className="inline-flex shrink-0 items-center gap-2 rounded-full border border-[#dce4dc] px-4 py-2.5 text-sm font-semibold text-[#285c45] transition-colors hover:border-[#9bbca1] hover:bg-[#f3f6f2] dark:border-[#35473a] dark:text-[#b6d8bd] dark:hover:bg-white/5"
           >
-            Sign in / Sign up
+            <UserRound size={16} />
+            Join / Sign in
           </Link>
           <Link
-            href="/listings"
+            href="/account?role=landlord"
             className="rounded-full bg-[#285c45] px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-[#1d4635] dark:bg-[#9ac5a5] dark:text-[#17231b] dark:hover:bg-[#b6d8bd]"
           >
-            Find a home
+            List your property
           </Link>
         </div>
 
-        <div className="flex items-center gap-3 md:hidden">
+        <div className="flex items-center gap-3 xl:hidden">
           <ThemeToggle />
           <button
             type="button"
@@ -104,26 +111,35 @@ export default function Navbar() {
           className="border-t border-[#e4e9e4] bg-white px-5 py-4 dark:border-[#2b3a30] dark:bg-[#18231c] md:hidden"
         >
           <div className="mx-auto flex max-w-7xl flex-col gap-1">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="rounded-lg px-3 py-3 text-sm font-medium text-[#354239] hover:bg-[#f3f6f2] dark:text-gray-100 dark:hover:bg-white/5"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) => {
+              const active = isActiveNavItem(pathname, item.href);
+              return (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  aria-current={active ? "page" : undefined}
+                  className={`rounded-lg px-3 py-3 text-sm font-medium hover:bg-[#f3f6f2] dark:hover:bg-white/5 ${
+                    active
+                      ? "text-[#285c45] dark:text-[#b6d8bd]"
+                      : "text-[#354239] dark:text-gray-100"
+                  }`}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
             <Link
               href="/account"
-              className="rounded-lg px-3 py-3 text-sm font-semibold text-[#285c45] hover:bg-[#f3f6f2] dark:text-[#b6d8bd] dark:hover:bg-white/5"
+              className="mt-1 inline-flex items-center gap-2 rounded-lg px-3 py-3 text-sm font-semibold text-[#285c45] hover:bg-[#f3f6f2] dark:text-[#b6d8bd] dark:hover:bg-white/5"
             >
-              Sign in / Sign up
+              <UserRound size={16} />
+              Join / Sign in
             </Link>
             <Link
-              href="/listings"
+              href="/account?role=landlord"
               className="mt-2 rounded-full bg-[#285c45] px-5 py-3 text-center text-sm font-semibold text-white dark:bg-[#9ac5a5] dark:text-[#17231b]"
             >
-              Find a home
+              List your property
             </Link>
           </div>
         </div>
