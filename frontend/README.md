@@ -19,6 +19,11 @@ server origin when it runs elsewhere:
 NEXT_PUBLIC_BACKEND_URL=http://127.0.0.1:8000
 ```
 
+`NEXT_PUBLIC_API_URL` is also supported as a fallback for existing deployments;
+`NEXT_PUBLIC_BACKEND_URL` takes precedence. Restart the Next.js server after
+changing either variable. In production, add the deployed frontend origin to
+Django's `CORS_ALLOWED_ORIGINS`.
+
 The listings endpoint should return a JSON array or a paginated object with a
 `results`, `data`, or `listings` array. Each listing should expose a title or
 name, a location, and a monthly rent or price. Optional fields include an id,

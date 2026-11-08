@@ -88,10 +88,21 @@ function normalizeListing(value: unknown, index: number): Listing | null {
 }
 
 export async function fetchListings(): Promise<Listing[]> {
-  const response = await fetch(`${getApiBaseUrl()}/api/listings/`, {
-    headers: { Accept: "application/json" },
-    cache: "no-store",
-  });
+  const endpoint = `${getApiBaseUrl()}/api/listings/`;
+  let response: Response;
+  try {
+    response = await fetch(endpoint, {
+      headers: { Accept: "application/json" },
+      cache: "no-store",
+    });
+  } catch (error) {
+    if (error instanceof TypeError) {
+      throw new Error(
+        `Could not connect to the Housepot API at ${endpoint}. Check that Django is running and allows requests from this frontend origin (CORS).`,
+      );
+    }
+    throw error;
+  }
 
   if (!response.ok) {
     throw new Error(`Listings request failed with status ${response.status}.`);
