@@ -23,7 +23,7 @@ from .serializers import (
 
 
 @extend_schema_view(
-    list=extend_schema(summary="Search published properties"),
+    list=extend_schema(summary="Search available and pending-review properties"),
     retrieve=extend_schema(summary="Get a property"),
     create=extend_schema(summary="Submit a property for review"),
 )
@@ -42,9 +42,10 @@ class PropertyViewSet(viewsets.ModelViewSet):
         user = self.request.user
         if user.is_authenticated and user.is_staff:
             return queryset
+        visible_statuses = [Property.Status.PUBLISHED, Property.Status.PENDING]
         if user.is_authenticated:
-            return queryset.filter(Q(status=Property.Status.PUBLISHED) | Q(owner=user))
-        return queryset.filter(status=Property.Status.PUBLISHED)
+            return queryset.filter(Q(status__in=visible_statuses) | Q(owner=user))
+        return queryset.filter(status__in=visible_statuses)
 
     def get_permissions(self):
         if self.action in {"create", "update", "partial_update", "destroy"}:

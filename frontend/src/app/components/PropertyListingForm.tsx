@@ -140,14 +140,14 @@ export default function PropertyListingForm() {
             <CheckCircle2 size={28} />
           </span>
           <p className="mt-6 text-xs font-bold uppercase tracking-[0.2em] text-[#52765b] dark:text-[#b6d8bd]">
-            Property submitted
+            Listing submitted
           </p>
           <h1 className="mt-3 text-3xl font-semibold tracking-tight text-[#202a24] dark:text-white">
             Thanks for sharing your home.
           </h1>
           <p className="mx-auto mt-4 max-w-lg leading-7 text-[#66736b] dark:text-[#aab5ad]">
-            Your property details were sent to Housepot. Our team will review
-            the submission and follow up with you about the next steps.
+            Your property is now visible in the listings while our team reviews
+            it. If it needs changes, we’ll contact you.
           </p>
           <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
             <Link

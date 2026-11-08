@@ -63,7 +63,7 @@ class PropertyApiTests(TestCase):
             status=Property.Status.PUBLISHED,
         )
 
-    def test_frontend_listing_payload_creates_pending_property_and_image(self):
+    def test_frontend_listing_payload_creates_visible_pending_property_and_image(self):
         self.authenticate(self.owner)
         response = self.client.post(
             "/api/listings/",
@@ -89,7 +89,11 @@ class PropertyApiTests(TestCase):
         self.assertEqual(len(response.data["images"]), 1)
 
         self.client.credentials()
-        self.assertEqual(self.client.get("/api/listings/").data["count"], 0)
+        public_listings = self.client.get("/api/listings/")
+        self.assertEqual(public_listings.status_code, 200)
+        self.assertEqual(public_listings.data["count"], 1)
+        self.assertEqual(public_listings.data["results"][0]["id"], property_obj.pk)
+
         self.authenticate(self.owner)
         self.assertEqual(self.client.get("/api/listings/mine/").data["count"], 1)
 

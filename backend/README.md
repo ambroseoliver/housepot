@@ -90,7 +90,7 @@ All new endpoints are versioned under `/api/v1/`. The frontend-compatible unvers
 | `GET/PATCH /api/v1/users/profile/` | Authenticated | Read or update the current profile |
 | `POST /api/v1/users/password/change/` | Authenticated | Change password; revoke existing sessions |
 | `DELETE /api/v1/users/account/` | Authenticated | Deactivate and anonymize the account |
-| `GET/POST /api/v1/listings/` | Public read; owner/agent write | Search listings or submit for review |
+| `GET/POST /api/v1/listings/` | Public read; owner/agent write | Browse published and pending-review listings or submit a listing |
 | `GET/PATCH/DELETE /api/v1/listings/{id}/` | Public read; owner/staff write | Retrieve or manage a listing |
 | `GET /api/v1/listings/mine/` | Authenticated | List the caller's listings, including drafts/review status |
 | `POST /api/v1/listings/{id}/approve/` | Staff | Approve and publish a listing |
@@ -107,10 +107,10 @@ Use the JWT `Authorization: Bearer <access>` header. Access tokens last 10 minut
 
 ### Roles and review flow
 
-- Anonymous visitors can browse published listings and public reviews.
+- Anonymous visitors can browse published and pending-review listings and public reviews; drafts, rejected, and archived listings stay private.
 - Tenants can favorite properties, submit inquiries/reviews, and report content.
 - Landlords and agents can create and manage only their own listings.
-- New and edited listings return to `pending_review`; only staff can approve or reject them. Unpublished listings are never exposed to other users.
+- New and edited listings enter `pending_review` and appear in public listings while staff review them. Staff can approve or reject them; drafts, rejected, and archived listings are not exposed publicly.
 - Staff accounts are created by trusted administrators with `createsuperuser` or the Django admin. Public registration cannot self-assign the agent/admin roles.
 - Suspended or inactive accounts cannot authenticate. Django staff status controls moderation and administrator endpoints.
 
