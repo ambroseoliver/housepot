@@ -11,12 +11,12 @@ npm run dev
 ```
 
 By default, the frontend requests rental homes from
-`http://127.0.0.1:8000/api/listings/`. Set `NEXT_PUBLIC_API_URL` to the Django
+`http://127.0.0.1:8000/api/listings/`. Set `NEXT_PUBLIC_BACKEND_URL` to the Django
 server origin when it runs elsewhere:
 
 ```bash
 # frontend/.env.local
-NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+NEXT_PUBLIC_BACKEND_URL=http://127.0.0.1:8000
 ```
 
 The listings endpoint should return a JSON array or a paginated object with a

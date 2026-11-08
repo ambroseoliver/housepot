@@ -156,7 +156,7 @@ export default function ListingGrid({
         <p className="mx-auto mt-2 max-w-lg text-sm leading-6 text-[#66736b] dark:text-[#aab5ad]">
           {error} Make sure the Django API is running and{" "}
           <code className="rounded bg-[#f1f5f0] px-1.5 py-0.5 dark:bg-[#26382b]">
-            NEXT_PUBLIC_API_URL
+            NEXT_PUBLIC_BACKEND_URL
           </code>{" "}
           points to it.
         </p>
